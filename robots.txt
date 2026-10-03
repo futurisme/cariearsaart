@@ -1,0 +1,10 @@
+User-agent: *
+Allow: /
+Allow: /mobile/
+Allow: /horimiya/
+Allow: /fadhil/
+Allow: /fadhil/mobile/
+Allow: /fadhil/horimiya/
+
+Sitemap: https://cariearsa.com/sitemap.xml
+Sitemap: https://cariearsa.com/fadhil/sitemap.xml
