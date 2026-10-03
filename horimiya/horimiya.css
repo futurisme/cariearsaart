@@ -139,7 +139,7 @@ html, body {
 
 /* ==========================================================================
    SHORT CENTERED MINIMALIST HEADER BADGE ("CARIEARSA.ART")
-   Persegi dengan sudut kiri dan kanan bawah mengeruncing (chamfered/pointed)
+   Persegi dengan sudut kiri dan kanan bawah mengeruncing curam (cyber-chamfered)
    ========================================================================== */
 .top-brand-badge {
   position: fixed;
@@ -158,14 +158,14 @@ html, body {
   align-items: center;
   justify-content: center;
   padding: 8px 30px 10px;
-  background: rgba(255, 255, 255, 0.94);
+  background: rgba(255, 255, 255, 0.95);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
-  border: 1px solid rgba(225, 29, 72, 0.28);
+  border: 1px solid rgba(225, 29, 72, 0.32);
   border-top: none;
-  /* Bentuk persegi dengan corner kiri dan kanan bawah mengeruncing */
-  clip-path: polygon(0 0, 100% 0, 100% calc(100% - 12px), calc(100% - 14px) 100%, 14px 100%, 0 calc(100% - 12px));
-  box-shadow: 0 6px 20px rgba(11, 19, 43, 0.08), 0 0 14px rgba(225, 29, 72, 0.12);
+  /* Irisan corner kiri dan kanan lebih curam (cyber angle: sudut vertikal tajam dari sisi ke bawah) */
+  clip-path: polygon(0 0, 100% 0, 100% calc(100% - 18px), calc(100% - 14px) 100%, 14px 100%, 0 calc(100% - 18px));
+  box-shadow: 0 6px 20px rgba(11, 19, 43, 0.08), 0 0 14px rgba(225, 29, 72, 0.15);
   text-decoration: none;
   transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
   position: relative;
@@ -174,23 +174,41 @@ html, body {
 .brand-badge-link:hover {
   background: rgba(255, 255, 255, 0.98);
   transform: translateY(2px);
-  box-shadow: 0 8px 24px rgba(225, 29, 72, 0.25);
-  border-color: var(--sakura-500);
+  box-shadow: 0 8px 24px rgba(255, 23, 68, 0.28);
+  border-color: #ff1744;
 }
 
 .brand-badge-text {
   font-family: var(--font-sans);
-  font-size: 0.95rem;
+  font-size: 1.04rem;
   font-weight: 900;
-  letter-spacing: 0.17em;
-  color: var(--aizome-950);
+  letter-spacing: 0.13em;
   text-transform: uppercase;
-  transition: color 0.2s ease;
   line-height: 1;
+  display: inline-flex;
+  align-items: baseline;
 }
 
-.brand-badge-link:hover .brand-badge-text {
-  color: var(--sakura-600);
+/* CARIEARSA: Manga-Red */
+.brand-badge-text .brand-text-manga {
+  color: #ff1744;
+  text-shadow: 0 0 10px rgba(255, 23, 68, 0.25);
+  transition: color 0.2s ease, text-shadow 0.2s ease;
+}
+
+/* .ART: Hitam Pekat */
+.brand-badge-text .brand-text-black {
+  color: #0b132b;
+  transition: color 0.2s ease;
+}
+
+.brand-badge-link:hover .brand-text-manga {
+  color: #e11d48;
+  text-shadow: 0 0 14px rgba(225, 29, 72, 0.4);
+}
+
+.brand-badge-link:hover .brand-text-black {
+  color: #000000;
 }
 
 /* ==========================================================================
@@ -715,15 +733,15 @@ section.screen-slide {
   object-position: 48% 28%;
   transform-origin: 48% 22%;
   transform: scale(1.04) translate3d(0, 0, 0);
-  filter: brightness(1.02) contrast(1.02);
-  will-change: transform, filter;
+  will-change: transform;
+  contain: paint;
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
 }
 
-/* Active 3.5-Second Cinematic Camera Zoomout Animation (Kontinu, Mulus Tanpa Jeda / Zero Stopping) */
+/* Active 3.5-Second Cinematic Camera Zoomout Animation (Ultra-Smooth Single-Equation Continuous Acceleration) */
 .hero-cinematic-backdrop .hero-cinematic-img.hero-camera-active {
-  animation: heroCameraZoomoutSequence 3.5s cubic-bezier(0.38, 0.04, 0.22, 1) forwards;
+  animation: heroCameraZoomoutSequence 3.5s cubic-bezier(0.52, 0.0, 0.18, 1.0) forwards;
 }
 
 @keyframes heroCameraZoomoutSequence {
@@ -732,7 +750,7 @@ section.screen-slide {
     transform: scale(1.98) translate3d(0, 5.2%, 0);
   }
   to {
-    /* Meluncur menurun dan zoomout secara kontinu tanpa jeda atau berhenti di tengah jalan */
+    /* Meluncur menurun dan zoomout secara kontinu tanpa jeda atau potongan, akselerasi terasa jelas dan mendarat presisi 3.5 detik */
     transform: scale(1.04) translate3d(0, 0, 0);
   }
 }
@@ -752,32 +770,28 @@ section.screen-slide {
   position: absolute;
   top: 4%;
   right: 18%;
-  width: 380px;
-  height: 380px;
+  width: 420px;
+  height: 420px;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(254, 249, 195, 0.45) 0%, rgba(253, 186, 116, 0.2) 35%, transparent 70%);
-  filter: blur(28px);
+  background: radial-gradient(circle, rgba(254, 249, 195, 0.5) 0%, rgba(254, 249, 195, 0.28) 25%, rgba(253, 186, 116, 0.12) 50%, rgba(253, 186, 116, 0.03) 65%, transparent 72%);
   pointer-events: none;
   z-index: 3;
+  will-change: transform, opacity;
   animation: hero-flare-glow 7s ease-in-out infinite alternate;
 }
 
 .hero-sky-flare.hero-flare-active {
-  animation: heroFlareSweep 3.5s ease-out forwards, hero-flare-glow 7s ease-in-out 3.5s infinite alternate;
+  animation: heroFlareSweep 3.5s cubic-bezier(0.52, 0.0, 0.18, 1.0) forwards, hero-flare-glow 7s ease-in-out 3.5s infinite alternate;
 }
 
 @keyframes heroFlareSweep {
-  0% {
-    opacity: 0.2;
-    transform: scale(0.6) translate(-20px, 20px);
+  from {
+    opacity: 0.25;
+    transform: scale(0.7) translate3d(-15px, 15px, 0);
   }
-  50% {
-    opacity: 0.95;
-    transform: scale(1.25) translate(8px, -6px);
-  }
-  100% {
-    opacity: 0.75;
-    transform: scale(1) translate(0, 0);
+  to {
+    opacity: 0.8;
+    transform: scale(1) translate3d(0, 0, 0);
   }
 }
 

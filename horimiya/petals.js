@@ -181,8 +181,8 @@ export function initPetalsEngine() {
     }
   }
 
-  // Increased petal count: 140 petals on normal, 35 on reduced motion (perbanyak jumlah bunga sakura)
-  const COUNT = prefersReducedMotion ? 35 : 140;
+  // Balanced high-performance petal count: 65 on normal, 25 on reduced motion (ultra-smooth 60-144 FPS)
+  const COUNT = prefersReducedMotion ? 25 : 65;
   const particles = [];
   for (let i = 0; i < COUNT; i++) {
     particles.push(new Petal());
