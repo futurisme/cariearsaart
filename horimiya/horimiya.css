@@ -1460,3 +1460,1113 @@ section.screen-slide {
   display: flex;
   justify-content: space-between;
 }
+
+/* ==========================================================================
+   INTERACTIVE SPLIT GRID (Common Layout for Slides 7, 8, 9)
+   ========================================================================== */
+.interactive-split-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 22px;
+  align-items: stretch;
+  width: 100%;
+  max-width: 1320px;
+  margin: 0 auto;
+}
+
+@media (max-width: 992px) {
+  .interactive-split-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+    overflow-y: auto;
+    max-height: 80vh;
+  }
+}
+
+.cyber-tag {
+  display: inline-block;
+  font-size: 0.64rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  color: #ff1744;
+  background: rgba(255, 23, 68, 0.08);
+  border: 1px solid rgba(255, 23, 68, 0.25);
+  padding: 3px 8px;
+  border-radius: 4px;
+  margin-bottom: 6px;
+  text-transform: uppercase;
+}
+
+/* ==========================================================================
+   SLIDE 7: MIYAMURA SECRET PIERCING & BAKERY STUDIO
+   ========================================================================== */
+.piercing-anatomy-card,
+.bakery-showcase-card {
+  background: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(225, 29, 72, 0.22);
+  border-radius: 16px;
+  padding: 20px 22px;
+  box-shadow: 0 12px 36px rgba(11, 19, 43, 0.08);
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.anatomy-title,
+.bakery-title,
+.tracklist-title,
+.studio-title,
+.wishing-title {
+  font-family: var(--font-sans);
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: var(--aizome-950);
+  margin: 0 0 4px;
+  line-height: 1.25;
+}
+
+.anatomy-sub,
+.bakery-desc,
+.tracklist-sub,
+.wishing-sub {
+  font-size: 0.76rem;
+  color: #64748b;
+  margin: 0;
+  line-height: 1.4;
+}
+
+/* Anatomy Viewport & Hotspots */
+.anatomy-viewport {
+  position: relative;
+  width: 100%;
+  height: 230px;
+  border-radius: 12px;
+  overflow: hidden;
+  background: #0b132b;
+  border: 1px solid rgba(0, 229, 255, 0.35);
+  box-shadow: inset 0 0 20px rgba(0, 229, 255, 0.15);
+}
+
+.anatomy-character-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 22%;
+  opacity: 0.92;
+  transition: transform 0.4s ease;
+}
+
+.hotspot-pin {
+  position: absolute;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  transform: translate(-50%, -50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 5;
+  padding: 0;
+}
+
+.pin-core {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #00e5ff;
+  box-shadow: 0 0 10px #00e5ff;
+  transition: all 0.2s ease;
+}
+
+.pin-pulse {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 2px solid #00e5ff;
+  animation: pin-pulse-ring 1.6s cubic-bezier(0.25, 1, 0.5, 1) infinite;
+  opacity: 0.8;
+}
+
+.hotspot-pin.active .pin-core {
+  background: #ff1744;
+  box-shadow: 0 0 12px #ff1744;
+  transform: scale(1.3);
+}
+
+.hotspot-pin.active .pin-pulse {
+  border-color: #ff1744;
+}
+
+.pin-label {
+  position: absolute;
+  bottom: 110%;
+  left: 50%;
+  transform: translateX(-50%) translateY(4px);
+  background: rgba(11, 19, 43, 0.92);
+  color: #ffffff;
+  font-size: 0.65rem;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: 4px;
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  transition: all 0.2s ease;
+  border: 1px solid rgba(0, 229, 255, 0.4);
+}
+
+.hotspot-pin:hover .pin-label,
+.hotspot-pin.active .pin-label {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+@keyframes pin-pulse-ring {
+  0% { transform: scale(0.6); opacity: 1; }
+  100% { transform: scale(2.2); opacity: 0; }
+}
+
+.hotspot-info-box {
+  background: rgba(248, 250, 252, 0.92);
+  border: 1px solid rgba(225, 29, 72, 0.18);
+  border-radius: 10px;
+  padding: 12px 14px;
+}
+
+.info-badge-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 6px;
+}
+
+.info-badge {
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  color: #ff1744;
+}
+
+.info-kanji {
+  font-family: var(--font-jp);
+  font-size: 0.82rem;
+  color: #64748b;
+  font-weight: 700;
+}
+
+.hotspot-info-box h4 {
+  font-size: 0.92rem;
+  color: var(--aizome-950);
+  margin: 0 0 6px;
+  font-weight: 800;
+}
+
+.hotspot-info-box p {
+  font-size: 0.78rem;
+  color: #334155;
+  line-height: 1.5;
+  margin: 0 0 8px;
+}
+
+.hotspot-info-box blockquote {
+  font-size: 0.75rem;
+  font-style: italic;
+  color: var(--sakura-700);
+  border-left: 2px solid #ff1744;
+  padding-left: 8px;
+  margin: 0;
+}
+
+/* Bakery Pastry Cards */
+.bakery-crest {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 4px;
+}
+
+.bakery-crest .crest-icon {
+  font-size: 1.6rem;
+}
+
+.pastry-items-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+.pastry-item-btn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 12px;
+  border-radius: 10px;
+  border: 1px solid rgba(225, 29, 72, 0.18);
+  background: rgba(255, 255, 255, 0.75);
+  cursor: pointer;
+  text-align: left;
+  transition: all 0.18s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.pastry-item-btn:hover {
+  background: rgba(254, 242, 242, 0.9);
+  border-color: #ff1744;
+  transform: translateY(-2px);
+}
+
+.pastry-item-btn.active {
+  background: #ffffff;
+  border: 1.5px solid #ff1744;
+  box-shadow: 0 4px 12px rgba(255, 23, 68, 0.18);
+}
+
+.pastry-icon {
+  font-size: 1.3rem;
+  flex-shrink: 0;
+}
+
+.pastry-meta strong {
+  display: block;
+  font-size: 0.78rem;
+  color: var(--aizome-950);
+}
+
+.pastry-meta span {
+  font-size: 0.68rem;
+  color: #64748b;
+}
+
+.bakery-recipe-terminal {
+  background: #0b132b;
+  border-radius: 10px;
+  padding: 12px 14px;
+  color: #e2e8f0;
+  border: 1px solid rgba(0, 229, 255, 0.3);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25);
+}
+
+.terminal-top {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 10px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.terminal-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+.terminal-dot.red { background: #ff1744; }
+.terminal-dot.yellow { background: #fbbf24; }
+.terminal-dot.green { background: #10b981; }
+
+.terminal-title {
+  font-family: monospace;
+  font-size: 0.68rem;
+  color: #00e5ff;
+  margin-left: 6px;
+}
+
+.recipe-stats-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.recipe-stat {
+  background: rgba(255, 255, 255, 0.05);
+  padding: 6px 8px;
+  border-radius: 6px;
+  text-align: center;
+}
+
+.recipe-stat .label {
+  display: block;
+  font-size: 0.62rem;
+  color: #94a3b8;
+  margin-bottom: 2px;
+}
+
+.recipe-stat strong {
+  font-size: 0.74rem;
+  color: #ffffff;
+}
+
+.recipe-note-box {
+  background: rgba(255, 255, 255, 0.04);
+  padding: 8px 10px;
+  border-radius: 6px;
+  margin-bottom: 8px;
+}
+
+.note-author {
+  font-size: 0.65rem;
+  color: #fb7185;
+  font-weight: 700;
+  display: block;
+  margin-bottom: 3px;
+}
+
+.recipe-note-box p {
+  font-size: 0.74rem;
+  color: #cbd5e1;
+  line-height: 1.45;
+  margin: 0;
+  font-family: var(--font-serif);
+}
+
+.hori-reaction-box {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  background: rgba(225, 29, 72, 0.12);
+  border: 1px solid rgba(225, 29, 72, 0.3);
+  padding: 7px 10px;
+  border-radius: 6px;
+}
+
+.reaction-avatar {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: #ff1744;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-jp);
+  font-size: 0.75rem;
+  font-weight: 900;
+  flex-shrink: 0;
+}
+
+.reaction-name {
+  font-size: 0.64rem;
+  color: #fb7185;
+  font-weight: 700;
+  display: block;
+}
+
+.hori-reaction-box p {
+  font-size: 0.72rem;
+  color: #fecdd3;
+  margin: 0;
+  line-height: 1.35;
+}
+
+/* ==========================================================================
+   SLIDE 8: MIYAMURA'S LO-FI VINYL TURNTABLE & CASSETTE DECK
+   ========================================================================== */
+.turntable-deck-card,
+.tracklist-card {
+  background: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(225, 29, 72, 0.22);
+  border-radius: 16px;
+  padding: 20px 22px;
+  box-shadow: 0 12px 36px rgba(11, 19, 43, 0.08);
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.turntable-plinth {
+  background: radial-gradient(circle at 50% 40%, #1e293b 0%, #0b132b 100%);
+  border-radius: 14px;
+  padding: 16px;
+  border: 1.5px solid rgba(0, 229, 255, 0.35);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4), inset 0 0 15px rgba(0, 229, 255, 0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+}
+
+.vinyl-disc-wrap {
+  position: relative;
+  width: 190px;
+  height: 190px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.vinyl-record {
+  width: 175px;
+  height: 175px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #0a0a0a 0%, #171717 40%, #0a0a0a 41%, #1f1f1f 70%, #000000 100%);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.7), inset 0 0 4px rgba(255, 255, 255, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  transition: transform 0.5s ease;
+}
+
+.vinyl-record.spinning {
+  animation: vinyl-spin 2.2s linear infinite;
+}
+
+@keyframes vinyl-spin {
+  to { transform: rotate(360deg); }
+}
+
+.vinyl-grooves {
+  position: absolute;
+  inset: 12px;
+  border-radius: 50%;
+  border: 1px dashed rgba(255, 255, 255, 0.08);
+  box-shadow: inset 0 0 0 8px rgba(0, 0, 0, 0.6), inset 0 0 0 16px rgba(255, 255, 255, 0.04);
+}
+
+.vinyl-label {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: #ff1744;
+  border: 2px solid #ffffff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 10px rgba(255, 23, 68, 0.4);
+  color: white;
+  text-align: center;
+}
+
+.label-circle {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #0b132b;
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  margin-bottom: 2px;
+}
+
+.label-text {
+  font-size: 0.44rem;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+}
+
+.label-sub {
+  font-size: 0.38rem;
+  opacity: 0.85;
+}
+
+/* Tone Arm Assembly */
+.tonearm-assembly {
+  position: absolute;
+  top: 6px;
+  right: 0px;
+  width: 32px;
+  height: 120px;
+  pointer-events: none;
+  transform-origin: 16px 14px;
+  transform: rotate(0deg);
+  transition: transform 0.6s cubic-bezier(0.2, 1, 0.3, 1);
+  z-index: 6;
+}
+
+.tonearm-assembly.playing {
+  transform: rotate(26deg);
+}
+
+.tonearm-pivot {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: #94a3b8;
+  border: 2px solid #cbd5e1;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+  margin: 0 auto;
+}
+
+.tonearm-arm {
+  width: 3px;
+  height: 80px;
+  background: linear-gradient(180deg, #cbd5e1, #64748b);
+  margin: 0 auto;
+  border-radius: 2px;
+}
+
+.tonearm-head {
+  width: 10px;
+  height: 18px;
+  background: #ff1744;
+  border-radius: 2px;
+  margin: -2px auto 0;
+  box-shadow: 0 0 6px rgba(255, 23, 68, 0.6);
+}
+
+.turntable-controls-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  gap: 12px;
+  background: rgba(0, 0, 0, 0.3);
+  padding: 8px 12px;
+  border-radius: 8px;
+}
+
+.deck-play-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: #ff1744;
+  color: white;
+  border: none;
+  padding: 7px 14px;
+  border-radius: 6px;
+  font-size: 0.76rem;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 0 12px rgba(255, 23, 68, 0.4);
+  transition: all 0.2s ease;
+}
+
+.deck-play-btn:hover {
+  background: #e11d48;
+  transform: scale(1.04);
+}
+
+.visualizer-container {
+  display: flex;
+  align-items: center;
+}
+
+#deck-eq-canvas {
+  background: rgba(0, 0, 0, 0.4);
+  border-radius: 4px;
+  border: 1px solid rgba(0, 229, 255, 0.3);
+}
+
+.rpm-selector {
+  display: flex;
+  gap: 4px;
+}
+
+.rpm-btn {
+  background: rgba(255, 255, 255, 0.1);
+  color: #94a3b8;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  font-size: 0.66rem;
+  font-weight: 700;
+  padding: 4px 7px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.rpm-btn.active {
+  background: #00e5ff;
+  color: #0b132b;
+  border-color: #00e5ff;
+}
+
+.deck-fx-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.fx-label {
+  font-size: 0.72rem;
+  color: #64748b;
+  font-weight: 600;
+}
+
+.deck-fx-btn {
+  background: rgba(255, 255, 255, 0.85);
+  border: 1px solid rgba(225, 29, 72, 0.2);
+  color: var(--aizome-950);
+  font-size: 0.7rem;
+  font-weight: 600;
+  padding: 5px 9px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.18s ease;
+}
+
+.deck-fx-btn.active {
+  background: rgba(255, 23, 68, 0.12);
+  border-color: #ff1744;
+  color: #ff1744;
+  box-shadow: 0 0 8px rgba(255, 23, 68, 0.15);
+}
+
+/* Tracklist Styles */
+.tracks-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.track-row-btn {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: 1px solid rgba(225, 29, 72, 0.12);
+  background: rgba(255, 255, 255, 0.7);
+  cursor: pointer;
+  text-align: left;
+  transition: all 0.18s ease;
+  width: 100%;
+}
+
+.track-row-btn:hover {
+  background: rgba(254, 242, 242, 0.9);
+  border-color: #ff1744;
+}
+
+.track-row-btn.active {
+  background: #ffffff;
+  border-left: 3px solid #ff1744;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+}
+
+.track-num {
+  font-size: 0.72rem;
+  font-weight: 800;
+  color: #ff1744;
+  font-family: monospace;
+}
+
+.track-info {
+  flex: 1;
+}
+
+.track-info strong {
+  display: block;
+  font-size: 0.78rem;
+  color: var(--aizome-950);
+}
+
+.track-info span {
+  font-size: 0.68rem;
+  color: #64748b;
+}
+
+.track-duration {
+  font-size: 0.7rem;
+  color: #94a3b8;
+  font-family: monospace;
+}
+
+.earphones-monologue-card {
+  background: rgba(11, 19, 43, 0.94);
+  border-radius: 10px;
+  padding: 12px 14px;
+  color: white;
+  border: 1px solid rgba(0, 229, 255, 0.35);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+}
+
+.monologue-head {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.68rem;
+  color: #00e5ff;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+
+.earphones-monologue-card blockquote {
+  font-family: var(--font-jp);
+  font-size: 0.88rem;
+  line-height: 1.4;
+  color: #f1f5f9;
+  margin: 0 0 6px;
+  font-weight: 600;
+}
+
+.earphones-monologue-card p {
+  font-size: 0.72rem;
+  color: #94a3b8;
+  font-style: italic;
+  margin: 0;
+  line-height: 1.35;
+}
+
+/* ==========================================================================
+   SLIDE 9: ROOFTOP POLAROID ART STUDIO & SAKURA WISHING SKY
+   ========================================================================== */
+.polaroid-studio-card,
+.wishing-tree-card {
+  background: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(225, 29, 72, 0.22);
+  border-radius: 16px;
+  padding: 20px 22px;
+  box-shadow: 0 12px 36px rgba(11, 19, 43, 0.08);
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.polaroid-interactive-layout {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  gap: 16px;
+  align-items: center;
+}
+
+@media (max-width: 600px) {
+  .polaroid-interactive-layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Authentic Polaroid Frame */
+.polaroid-frame {
+  background: #ffffff;
+  padding: 10px 10px 24px;
+  border-radius: 4px;
+  box-shadow: 0 10px 28px rgba(11, 19, 43, 0.2), 0 0 0 1px rgba(0, 0, 0, 0.05);
+  transform: rotate(-1.5deg);
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s ease;
+  width: 190px;
+}
+
+.polaroid-frame:hover {
+  transform: rotate(0deg) scale(1.03);
+  box-shadow: 0 14px 34px rgba(225, 29, 72, 0.22);
+}
+
+.polaroid-inner-photo {
+  position: relative;
+  width: 170px;
+  height: 170px;
+  background: #0b132b;
+  overflow: hidden;
+}
+
+.polaroid-inner-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: filter 0.3s ease;
+}
+
+/* Polaroid Filter Shaders */
+.polaroid-inner-photo.filter-cel img {
+  filter: saturate(1.4) contrast(1.15) brightness(1.05);
+}
+
+.polaroid-inner-photo.filter-sunset img {
+  filter: sepia(0.35) saturate(1.3) hue-rotate(-15deg) contrast(1.05);
+}
+
+.polaroid-inner-photo.filter-manga img {
+  filter: grayscale(1) contrast(1.6) brightness(1.08);
+}
+
+.polaroid-sticker-layer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.polaroid-sticker.st-sakura {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  font-size: 1.1rem;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+}
+
+.polaroid-sticker.st-seal {
+  position: absolute;
+  bottom: 8px;
+  right: 8px;
+  background: #ff1744;
+  color: white;
+  font-family: var(--font-jp);
+  font-size: 0.58rem;
+  font-weight: 900;
+  padding: 2px 5px;
+  border-radius: 3px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+}
+
+.polaroid-caption-area {
+  padding-top: 10px;
+  text-align: center;
+}
+
+.polaroid-handwritten {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 0.74rem;
+  color: var(--aizome-950);
+  margin: 0 0 4px;
+  line-height: 1.35;
+  min-height: 28px;
+}
+
+.polaroid-date {
+  font-family: monospace;
+  font-size: 0.58rem;
+  color: #94a3b8;
+  letter-spacing: 0.08em;
+}
+
+/* Polaroid Controls */
+.polaroid-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.control-group {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.control-label {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--aizome-950);
+}
+
+.pill-group {
+  display: flex;
+  gap: 5px;
+  flex-wrap: wrap;
+}
+
+.polaroid-pill,
+.filter-pill {
+  background: #f1f5f9;
+  border: 1px solid #cbd5e1;
+  color: #475569;
+  font-size: 0.68rem;
+  font-weight: 600;
+  padding: 4px 8px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.polaroid-pill.active,
+.filter-pill.active {
+  background: #ff1744;
+  border-color: #ff1744;
+  color: white;
+  box-shadow: 0 2px 8px rgba(255, 23, 68, 0.25);
+}
+
+.polaroid-text-input {
+  width: 100%;
+  padding: 7px 10px;
+  border-radius: 6px;
+  border: 1px solid #cbd5e1;
+  font-size: 0.75rem;
+  font-family: inherit;
+  background: #ffffff;
+  color: var(--aizome-950);
+}
+
+.polaroid-text-input:focus {
+  outline: none;
+  border-color: #ff1744;
+  box-shadow: 0 0 0 2px rgba(255, 23, 68, 0.15);
+}
+
+.download-polaroid-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  background: var(--aizome-950);
+  color: #ffffff;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 8px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 14px rgba(11, 19, 43, 0.2);
+}
+
+.download-polaroid-btn:hover {
+  background: #ff1744;
+  box-shadow: 0 6px 18px rgba(255, 23, 68, 0.35);
+  transform: translateY(-2px);
+}
+
+/* Wishing Sky Form & Stream */
+.ribbon-form {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.ribbon-color-picker {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.picker-label {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--aizome-950);
+}
+
+.ribbon-color-options {
+  display: flex;
+  gap: 12px;
+}
+
+.color-radio {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  cursor: pointer;
+  font-size: 0.7rem;
+  color: #475569;
+}
+
+.color-radio input {
+  display: none;
+}
+
+.color-swatch {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  display: inline-block;
+  border: 2px solid #ffffff;
+  box-shadow: 0 0 0 1px #cbd5e1;
+  transition: transform 0.15s ease;
+}
+
+.color-radio input:checked + .color-swatch {
+  transform: scale(1.25);
+  box-shadow: 0 0 0 2px #ff1744;
+}
+
+.ribbon-input-group {
+  display: flex;
+  gap: 8px;
+}
+
+.ribbon-input-group input {
+  flex: 1;
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: 1px solid #cbd5e1;
+  font-size: 0.78rem;
+  font-family: inherit;
+}
+
+.ribbon-input-group input:focus {
+  outline: none;
+  border-color: #ff1744;
+}
+
+.ribbon-send-btn {
+  background: #ff1744;
+  color: white;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 8px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 12px rgba(255, 23, 68, 0.25);
+}
+
+.ribbon-send-btn:hover {
+  background: #e11d48;
+  transform: translateY(-2px);
+}
+
+.sky-ribbons-viewport {
+  position: relative;
+  background: radial-gradient(circle at 50% 10%, #1e293b 0%, #0b132b 100%);
+  border-radius: 12px;
+  padding: 12px;
+  height: 180px;
+  overflow: hidden;
+  border: 1px solid rgba(0, 229, 255, 0.3);
+  display: flex;
+  flex-direction: column;
+}
+
+.sky-counter-badge {
+  font-size: 0.68rem;
+  color: #00e5ff;
+  font-weight: 700;
+  margin-bottom: 8px;
+  z-index: 2;
+}
+
+.sky-counter-badge span {
+  font-size: 0.82rem;
+  color: #ffffff;
+  font-family: monospace;
+}
+
+.floating-ribbons-stream {
+  position: relative;
+  flex: 1;
+  overflow: hidden;
+}
+
+.fluttering-ribbon {
+  position: absolute;
+  bottom: -20px;
+  padding: 4px 10px;
+  border-radius: 4px;
+  font-size: 0.68rem;
+  font-weight: 600;
+  color: #0b132b;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+  white-space: nowrap;
+  animation: ribbon-flutter 7s ease-in forwards;
+  pointer-events: none;
+  border: 1px solid rgba(255, 255, 255, 0.8);
+}
+
+@keyframes ribbon-flutter {
+  0% {
+    transform: translateY(0) translateX(0) rotate(0deg);
+    opacity: 0;
+  }
+  15% {
+    opacity: 0.95;
+  }
+  50% {
+    transform: translateY(-80px) translateX(25px) rotate(8deg);
+  }
+  85% {
+    opacity: 0.7;
+  }
+  100% {
+    transform: translateY(-200px) translateX(-15px) rotate(-6deg);
+    opacity: 0;
+  }
+}

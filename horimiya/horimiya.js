@@ -25,6 +25,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // 7. Persistent Memorial Guestbook
   initGuestbook();
+
+  // 8. Slide 7: Miyamura Secret Piercing & Bakery Studio
+  initPiercingBakeryStudio();
+
+  // 9. Slide 8: Katagiri Soundtrack & Lo-Fi Vinyl Deck
+  initLoFiTurntableDeck();
+
+  // 10. Slide 9: Rooftop Polaroid Keepsake Studio & Wishing Sky
+  initPolaroidWishingStudio();
 });
 
 /* ==========================================================================
@@ -93,6 +102,7 @@ function waitForBerandaReady() {
 
 function initDeferredSecondaryMedia() {
   const SECONDARY_MEDIA = [
+    '/assets/horimiya/miyamura-casual.webp',
     '/assets/horimiya/horimiya-romance-duo-clean.webp',
     '/assets/horimiya/horimiya-hero-bg.webp',
     '/assets/horimiya/miyamura-fullbody.webp',
@@ -1093,3 +1103,548 @@ function escapeHtml(str) {
     "'": '&#039;'
   }[m]));
 }
+
+/* ==========================================================================
+   SLIDE 7: MIYAMURA SECRET PIERCING & BAKERY STUDIO
+   ========================================================================== */
+function initPiercingBakeryStudio() {
+  const slide = document.getElementById('slide-piercing-bakery');
+  if (!slide) return;
+
+  // Web Audio UI chime synthesizer
+  let audioCtx = null;
+  function playUiChime(freq = 659.25, type = 'sine') {
+    try {
+      if (!audioCtx) {
+        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      }
+      if (audioCtx.state === 'suspended') {
+        audioCtx.resume();
+      }
+      const osc = audioCtx.createOscillator();
+      const gain = audioCtx.createGain();
+      osc.type = type;
+      osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+      gain.gain.setValueAtTime(0.08, audioCtx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + 0.35);
+      osc.connect(gain);
+      gain.connect(audioCtx.destination);
+      osc.start();
+      osc.stop(audioCtx.currentTime + 0.35);
+    } catch (_) {}
+  }
+
+  // 1. Hotspot Piercings Data & Controller
+  const HOTSPOTS = {
+    'ear-right': {
+      badge: 'TELINGA KANAN (4 TINDIK)',
+      kanji: '右耳ピアス',
+      title: 'Helix & Triple Lobe Ring',
+      desc: 'Ditindik saat SMP menggunakan peniti karena merasa terasingkan dari semua teman sekelas. Menusukkan jarum adalah satu-satunya pelampiasan rasa sakit batinnya saat itu sebelum bertemu Hori.',
+      quote: '"Di sekolah aku menutupi telingaku dengan rambut panjang... hanya Hori-san yang tahu pertama kali."'
+    },
+    'ear-left': {
+      badge: 'TELINGA KIRI (4 TINDIK)',
+      kanji: '左耳ピアス',
+      title: 'Upper Cartilage & Orbital Studs',
+      desc: 'Empat tindikan di telinga kiri yang menambah total 8 tindik telinga. Sering kali dipasangi anting perak kecil model hoop yang hanya dipakainya saat berkeliaran sore hari di luar jam sekolah.',
+      quote: '"Kalau guru sekolah tahu, aku pasti langsung diskors atau disuruh mencopot semuanya."'
+    },
+    'lip': {
+      badge: 'TINDIK BIBIR (1 TINDIK)',
+      kanji: '口ピアス',
+      title: 'Silver Labret Piercing',
+      desc: 'Tindik di bagian tengah bibir bawah. Tindikan inilah yang membuat penampilannya terlihat seperti anak berandalan/punk saat menolong Souta yang terjatuh di jalan.',
+      quote: '"Hori-san tidak takut sama sekali saat melihat anting bibirku. Malah dia menyuruhku masuk ke rumahnya."'
+    },
+    'tattoo': {
+      badge: 'TATO RAHASIA',
+      kanji: '隠されたタトゥー',
+      title: 'Tribal Flame & Cherry Blossom Motif',
+      desc: 'Tato besar yang membentang dari bahu kiri hingga rusuk samping. Alasan utama mengapa ia tak pernah mau melepas jaket seragam atau membuka kancing baju bahkan di terik musim panas.',
+      quote: '"Bahkan saat pelajaran renang, aku selalu mencari alasan izin sakit agar tatoku tidak terlihat."'
+    },
+    'bakery': {
+      badge: 'APRON TOKO ROTI KELUARGA',
+      kanji: '宮村製菓・ベーカリー',
+      title: 'Patisserie Miyamura Special',
+      desc: 'Di balik penampilan punk dan tindik peraknya, Miyamura adalah putra pembuat roti yang terampil menghias kue tart lembut dan membuat adonan pastry Prancis yang harum.',
+      quote: '"Ibuku selalu senang kalau aku membantu di dapur. Memanggang kue membuat pikiranku tenang."'
+    }
+  };
+
+  const hotspotBtns = slide.querySelectorAll('.hotspot-pin');
+  const badgeEl = slide.querySelector('#hotspot-badge');
+  const kanjiEl = slide.querySelector('.info-kanji');
+  const titleEl = slide.querySelector('#hotspot-title');
+  const descEl = slide.querySelector('#hotspot-desc');
+  const quoteEl = slide.querySelector('#hotspot-quote');
+
+  hotspotBtns.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      hotspotBtns.forEach((b) => b.classList.remove('active'));
+      btn.classList.add('active');
+      const spotKey = btn.getAttribute('data-spot');
+      const data = HOTSPOTS[spotKey];
+      if (!data) return;
+
+      playUiChime(784, 'sine'); // G5 chime
+
+      if (badgeEl) badgeEl.textContent = data.badge;
+      if (kanjiEl) kanjiEl.textContent = data.kanji;
+      if (titleEl) titleEl.textContent = data.title;
+      if (descEl) descEl.textContent = data.desc;
+      if (quoteEl) quoteEl.textContent = data.quote;
+    });
+  });
+
+  // 2. Bakery Pastry Selector Data & Controller
+  const PASTRIES = {
+    montblanc: {
+      temp: '175°C (24 mnt)',
+      sweet: '★★★★☆ (Pas)',
+      batch: '18 Porsi Terbatas',
+      notes: '"Krim kastanye Prancis disaring dua kali agar seratnya halus di lidah. Souta sangat suka jika bagian puncaknya diberi taburan gula salju tebal."',
+      comment: '"Roti kastanye buatan Miyamura ini favorit Souta dan ayahku! Lembut banget dan aromanya bikin kangen."'
+    },
+    shortcake: {
+      temp: '160°C (30 mnt)',
+      sweet: '★★★★★ (Manis Lembut)',
+      batch: '12 Slice Segar',
+      notes: '"Sponge cake ekstra fluffy dengan krim kocok Hokkaido segar dan stroberi manis Tochigi pilihan."',
+      comment: '"Setiap kali Miyamura bawa kue ini ke rumah, Souta langsung melompat kegirangan di ruang tamu!"'
+    },
+    melonpan: {
+      temp: '180°C (18 mnt)',
+      sweet: '★★★☆☆ (Renyah Gurih)',
+      batch: '24 Buah Renyah',
+      notes: '"Kerak biskuit luar bergaris khas dengan campuran bubuk matcha Kyoto Uji asli. Renyah di luar lembut di dalam."',
+      comment: '"Tekstur crunchnya juara! Sengoku dan Remi sampai rebutan waktu kita piknik bersama."'
+    },
+    croissant: {
+      temp: '200°C (16 mnt)',
+      sweet: '★★★★☆ (Rich Butter)',
+      batch: '20 Buah Hangat',
+      notes: '"Lipatan adonan beragi 27 lapis mentega Prancis dengan isian batangan cokelat hitam Valrhona 70%."',
+      comment: '"Aroma cokelat panggangnya tercium sampai ke kamar tidur kalau Miyamura datang pagi-pagi!"'
+    }
+  };
+
+  const pastryBtns = slide.querySelectorAll('.pastry-item-btn');
+  const tempEl = slide.querySelector('#recipe-temp');
+  const sweetnessEl = slide.querySelector('#recipe-sweetness');
+  const batchEl = slide.querySelector('#recipe-batch');
+  const notesEl = slide.querySelector('#recipe-notes');
+  const commentEl = slide.querySelector('#hori-comment');
+
+  pastryBtns.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      pastryBtns.forEach((b) => b.classList.remove('active'));
+      btn.classList.add('active');
+      const pKey = btn.getAttribute('data-pastry');
+      const data = PASTRIES[pKey];
+      if (!data) return;
+
+      playUiChime(523.25, 'triangle'); // C5 warm chime
+
+      if (tempEl) tempEl.textContent = data.temp;
+      if (sweetnessEl) sweetnessEl.textContent = data.sweet;
+      if (batchEl) batchEl.textContent = data.batch;
+      if (notesEl) notesEl.textContent = data.notes;
+      if (commentEl) commentEl.textContent = data.comment;
+    });
+  });
+}
+
+/* ==========================================================================
+   SLIDE 8: SOUNDTRACK OF KATAGIRI - MIYAMURA'S LO-FI VINYL TURNTABLE
+   ========================================================================== */
+function initLoFiTurntableDeck() {
+  const slide = document.getElementById('slide-miyamura-beats');
+  if (!slide) return;
+
+  const vinylRecord = slide.querySelector('#turntable-vinyl');
+  const tonearm = slide.querySelector('#tonearm');
+  const playToggleBtn = slide.querySelector('#deck-play-toggle');
+  const playIcon = slide.querySelector('#deck-play-icon');
+  const pauseIcon = slide.querySelector('#deck-pause-icon');
+  const statusLabel = slide.querySelector('#deck-play-status');
+  const eqCanvas = slide.querySelector('#deck-eq-canvas');
+  const eqCtx = eqCanvas ? eqCanvas.getContext('2d') : null;
+
+  let isPlaying = false;
+  let animFrameId = null;
+  let webAudioCtx = null;
+  let masterGain = null;
+  let crackleNode = null;
+  let chordOscillators = [];
+  let currentTrackIdx = 1;
+  let currentRpm = 33;
+
+  const TRACKS = {
+    1: {
+      title: 'Sora no Hikari',
+      monologueJp: '「誰にも見せたくなかった自分が、堀さんと出会って全部変わった。」',
+      monologueId: '"Diri yang dulu tak ingin kuperlihatkan kepada siapa pun... semuanya berubah sejak aku bertemu dengan Hori-san."',
+      chords: [261.63, 329.63, 392.0, 493.88] // Cmaj7
+    },
+    2: {
+      title: 'Spring Rain on Katagiri High',
+      monologueJp: '「雨の音を聞きながら、堀さんの家に向かう時間が一番好きだった。」',
+      monologueId: '"Mendengarkan suara hujan sambil berjalan ke rumah Hori-san adalah saat-saat paling favoritku."',
+      chords: [220.0, 261.63, 329.63, 392.0] // Am7
+    },
+    3: {
+      title: 'Secret Piercing Walk',
+      monologueJp: '「ピアスを開けたのは孤独だったから。でも今は、もう一人じゃない。」',
+      monologueId: '"Aku menindik telingaku dulu karena merasa sendirian. Tapi sekarang, aku tak lagi sendiri."',
+      chords: [349.23, 440.0, 523.25, 659.25] // Fmaj7
+    },
+    4: {
+      title: 'Bakery Sunday Morning Bossa',
+      monologueJp: '「日曜日の朝、焼きたてのパンの匂い。これが僕の日常。」',
+      monologueId: '"Minggu pagi dengan aroma roti yang baru matang. Inilah kehidupan sehari-hariku."',
+      chords: [293.66, 349.23, 440.0, 523.25] // Dm7
+    }
+  };
+
+  function startDeckAudio() {
+    try {
+      if (!webAudioCtx) {
+        webAudioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        masterGain = webAudioCtx.createGain();
+        masterGain.gain.setValueAtTime(0.08, webAudioCtx.currentTime);
+        masterGain.connect(webAudioCtx.destination);
+      }
+      if (webAudioCtx.state === 'suspended') {
+        webAudioCtx.resume();
+      }
+
+      stopChordOscillators();
+
+      const track = TRACKS[currentTrackIdx] || TRACKS[1];
+      const pitchFactor = currentRpm === 45 ? 1.15 : 1.0;
+
+      // Create warm ambient chord pad
+      track.chords.forEach((baseFreq) => {
+        const osc = webAudioCtx.createOscillator();
+        const biquad = webAudioCtx.createBiquadFilter();
+        const gain = webAudioCtx.createGain();
+
+        osc.type = 'triangle';
+        osc.frequency.setValueAtTime(baseFreq * pitchFactor, webAudioCtx.currentTime);
+
+        biquad.type = 'lowpass';
+        biquad.frequency.setValueAtTime(650, webAudioCtx.currentTime);
+
+        gain.gain.setValueAtTime(0.02, webAudioCtx.currentTime);
+
+        osc.connect(biquad);
+        biquad.connect(gain);
+        gain.connect(masterGain);
+
+        osc.start();
+        chordOscillators.push(osc);
+      });
+    } catch (_) {}
+  }
+
+  function stopChordOscillators() {
+    chordOscillators.forEach((osc) => {
+      try {
+        osc.stop();
+        osc.disconnect();
+      } catch (_) {}
+    });
+    chordOscillators = [];
+  }
+
+  function togglePlayState() {
+    isPlaying = !isPlaying;
+    if (isPlaying) {
+      if (vinylRecord) vinylRecord.classList.add('spinning');
+      if (tonearm) tonearm.classList.add('playing');
+      if (playIcon) playIcon.style.display = 'none';
+      if (pauseIcon) pauseIcon.style.display = 'inline-block';
+      if (statusLabel) statusLabel.textContent = 'Jeda Vinyl';
+      startDeckAudio();
+      renderVisualizer();
+    } else {
+      if (vinylRecord) vinylRecord.classList.remove('spinning');
+      if (tonearm) tonearm.classList.remove('playing');
+      if (playIcon) playIcon.style.display = 'inline-block';
+      if (pauseIcon) pauseIcon.style.display = 'none';
+      if (statusLabel) statusLabel.textContent = 'Putar Vinyl';
+      stopChordOscillators();
+      cancelAnimationFrame(animFrameId);
+      clearVisualizer();
+    }
+  }
+
+  if (playToggleBtn) {
+    playToggleBtn.addEventListener('click', togglePlayState);
+  }
+
+  // Visualizer Bars Animation Loop
+  function renderVisualizer() {
+    if (!eqCtx || !eqCanvas) return;
+    eqCtx.clearRect(0, 0, eqCanvas.width, eqCanvas.height);
+
+    const bars = 16;
+    const barWidth = 8;
+    const gap = 3;
+    const t = performance.now() / 150;
+
+    for (let i = 0; i < bars; i++) {
+      const h = Math.abs(Math.sin(t + i * 0.45) * Math.cos(t * 0.7 + i * 0.3)) * (eqCanvas.height - 4) + 4;
+      const x = i * (barWidth + gap) + 4;
+      const y = eqCanvas.height - h;
+
+      const grad = eqCtx.createLinearGradient(0, eqCanvas.height, 0, 0);
+      grad.addColorStop(0, '#00e5ff');
+      grad.addColorStop(1, '#ff1744');
+
+      eqCtx.fillStyle = grad;
+      eqCtx.fillRect(x, y, barWidth, h);
+    }
+
+    if (isPlaying) {
+      animFrameId = requestAnimationFrame(renderVisualizer);
+    }
+  }
+
+  function clearVisualizer() {
+    if (!eqCtx || !eqCanvas) return;
+    eqCtx.clearRect(0, 0, eqCanvas.width, eqCanvas.height);
+    // Draw resting baseline
+    eqCtx.fillStyle = 'rgba(0, 229, 255, 0.3)';
+    for (let i = 0; i < 16; i++) {
+      eqCtx.fillRect(i * 11 + 4, eqCanvas.height - 3, 8, 3);
+    }
+  }
+
+  clearVisualizer();
+
+  // Track Selector
+  const trackBtns = slide.querySelectorAll('.track-row-btn');
+  const monologueJpEl = slide.querySelector('#monologue-text');
+  const monologueIdEl = slide.querySelector('#monologue-trans');
+
+  trackBtns.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      trackBtns.forEach((b) => b.classList.remove('active'));
+      btn.classList.add('active');
+      const trackId = parseInt(btn.getAttribute('data-track'), 10) || 1;
+      currentTrackIdx = trackId;
+      const data = TRACKS[trackId];
+      if (data) {
+        if (monologueJpEl) monologueJpEl.textContent = data.monologueJp;
+        if (monologueIdEl) monologueIdEl.textContent = data.monologueId;
+      }
+      if (isPlaying) {
+        startDeckAudio();
+      }
+    });
+  });
+
+  // RPM Selector (33 vs 45)
+  const rpmBtns = slide.querySelectorAll('.rpm-btn');
+  rpmBtns.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      rpmBtns.forEach((b) => b.classList.remove('active'));
+      btn.classList.add('active');
+      currentRpm = parseInt(btn.getAttribute('data-rpm'), 10) || 33;
+      if (vinylRecord) {
+        vinylRecord.style.animationDuration = currentRpm === 45 ? '1.5s' : '2.2s';
+      }
+      if (isPlaying) {
+        startDeckAudio();
+      }
+    });
+  });
+
+  // Sound FX Toggles
+  const fxBtns = slide.querySelectorAll('.deck-fx-btn');
+  fxBtns.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      btn.classList.toggle('active');
+    });
+  });
+}
+
+/* ==========================================================================
+   SLIDE 9: ROOFTOP POLAROID ART STUDIO & SAKURA WISHING SKY
+   ========================================================================== */
+function initPolaroidWishingStudio() {
+  const slide = document.getElementById('slide-polaroid-wishes');
+  if (!slide) return;
+
+  // 1. Polaroid Customizer
+  const previewImg = slide.querySelector('#polaroid-preview-img');
+  const photoFrame = slide.querySelector('#polaroid-photo-frame');
+  const captionEl = slide.querySelector('#polaroid-text-display');
+  const textInput = slide.querySelector('#polaroid-input');
+  const scenePills = slide.querySelectorAll('.polaroid-pill');
+  const filterPills = slide.querySelectorAll('.filter-pill');
+  const downloadBtn = slide.querySelector('#btn-download-polaroid');
+
+  let currentImgSrc = '/assets/horimiya/miyamura-rooftop.webp';
+  let currentFilter = 'normal';
+
+  // Live text sync
+  if (textInput && captionEl) {
+    textInput.addEventListener('input', () => {
+      captionEl.textContent = textInput.value || 'Katagiri High Memorial';
+    });
+  }
+
+  // Scene switcher
+  scenePills.forEach((pill) => {
+    pill.addEventListener('click', () => {
+      scenePills.forEach((p) => p.classList.remove('active'));
+      pill.classList.add('active');
+      const src = pill.getAttribute('data-img');
+      if (src && previewImg) {
+        currentImgSrc = src;
+        previewImg.src = src;
+      }
+    });
+  });
+
+  // Filter switcher
+  filterPills.forEach((pill) => {
+    pill.addEventListener('click', () => {
+      filterPills.forEach((p) => p.classList.remove('active'));
+      pill.classList.add('active');
+      currentFilter = pill.getAttribute('data-filter') || 'normal';
+      if (photoFrame) {
+        photoFrame.className = 'polaroid-inner-photo filter-' + currentFilter;
+      }
+    });
+  });
+
+  // HD Offscreen Canvas PNG Generator & Downloader
+  if (downloadBtn) {
+    downloadBtn.addEventListener('click', () => {
+      const cvs = document.createElement('canvas');
+      cvs.width = 800;
+      cvs.height = 1000;
+      const ctx = cvs.getContext('2d');
+      if (!ctx) return;
+
+      // Draw white polaroid frame with shadow
+      ctx.fillStyle = '#ffffff';
+      ctx.fillRect(0, 0, cvs.width, cvs.height);
+
+      // Inner image bounding box
+      const pad = 44;
+      const imgSize = 712;
+
+      const img = new Image();
+      img.crossOrigin = 'anonymous';
+      img.src = currentImgSrc;
+
+      img.onload = () => {
+        ctx.save();
+        if (currentFilter === 'cel') {
+          ctx.filter = 'saturate(1.4) contrast(1.15) brightness(1.05)';
+        } else if (currentFilter === 'sunset') {
+          ctx.filter = 'sepia(0.35) saturate(1.3) contrast(1.05)';
+        } else if (currentFilter === 'manga') {
+          ctx.filter = 'grayscale(1) contrast(1.6) brightness(1.08)';
+        }
+        ctx.drawImage(img, pad, pad, imgSize, imgSize);
+        ctx.restore();
+
+        // Sakura sticker
+        ctx.font = '40px sans-serif';
+        ctx.fillText('🌸', pad + imgSize - 55, pad + 55);
+
+        // Graduation Seal Badge
+        ctx.fillStyle = '#ff1744';
+        ctx.fillRect(pad + imgSize - 120, pad + imgSize - 40, 110, 30);
+        ctx.fillStyle = '#ffffff';
+        ctx.font = 'bold 16px "Noto Serif JP", serif';
+        ctx.fillText('卒業記念', pad + imgSize - 105, pad + imgSize - 19);
+
+        // Handwritten caption
+        ctx.fillStyle = '#0b132b';
+        ctx.font = 'italic 28px "Georgia", serif';
+        ctx.textAlign = 'center';
+        const text = textInput ? textInput.value : 'Katagiri High Memories';
+        ctx.fillText(text, cvs.width / 2, 850);
+
+        // Date and School stamp
+        ctx.fillStyle = '#94a3b8';
+        ctx.font = '16px monospace';
+        ctx.fillText('2026.03.31 KATAGIRI HIGH · IZUMI MIYAMURA', cvs.width / 2, 910);
+
+        // Download trigger
+        const link = document.createElement('a');
+        link.download = 'Katagiri_Polaroid_Miyamura.png';
+        link.href = cvs.toDataURL('image/png');
+        link.click();
+      };
+    });
+  }
+
+  // 2. Sakura Sky Wishing Ribbons
+  const wishForm = slide.querySelector('#ribbon-wish-form');
+  const wishInput = slide.querySelector('#ribbon-wish-text');
+  const ribbonStream = slide.querySelector('#floating-ribbons-stream');
+  const totalCountEl = slide.querySelector('#ribbon-total-count');
+
+  let ribbonCount = 247;
+  try {
+    const savedCount = parseInt(localStorage.getItem('katagiri_sky_ribbons_count'), 10);
+    if (!isNaN(savedCount) && savedCount > 247) ribbonCount = savedCount;
+  } catch (_) {}
+  if (totalCountEl) totalCountEl.textContent = ribbonCount.toString();
+
+  function spawnRibbon(text, color = '#fb7185') {
+    if (!ribbonStream) return;
+    const ribbon = document.createElement('div');
+    ribbon.className = 'fluttering-ribbon';
+    ribbon.style.background = color;
+    ribbon.style.left = (Math.random() * 60 + 10) + '%';
+    ribbon.style.animationDuration = (Math.random() * 2.5 + 5.5) + 's';
+    ribbon.textContent = '✨ ' + escapeHtml(text);
+    ribbonStream.appendChild(ribbon);
+
+    setTimeout(() => {
+      ribbon.remove();
+    }, 7500);
+  }
+
+  // Seed preset initial fluttering ribbons
+  const PRESET_WISHES = [
+    { text: 'Semoga cinta Miyamura & Hori abadi selamanya!', color: '#fb7185' },
+    { text: 'Selamat wisuda anak-anak Katagiri High!', color: '#38bdf8' },
+    { text: 'Souta tumbuh besar jadi anak yang hebat!', color: '#fbbf24' }
+  ];
+  PRESET_WISHES.forEach((pw, idx) => {
+    setTimeout(() => spawnRibbon(pw.text, pw.color), idx * 1800 + 500);
+  });
+
+  if (wishForm) {
+    wishForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const txt = wishInput ? wishInput.value.trim() : '';
+      if (!txt) return;
+
+      const checkedColor = wishForm.querySelector('input[name="ribbon-color"]:checked');
+      const color = checkedColor ? checkedColor.value : '#fb7185';
+
+      spawnRibbon(txt, color);
+
+      ribbonCount++;
+      if (totalCountEl) totalCountEl.textContent = ribbonCount.toString();
+      try {
+        localStorage.setItem('katagiri_sky_ribbons_count', ribbonCount.toString());
+      } catch (_) {}
+
+      if (wishInput) wishInput.value = '';
+    });
+  }
+}
+
