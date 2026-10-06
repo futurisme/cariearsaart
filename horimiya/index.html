@@ -195,61 +195,58 @@
         <div class="hero-sky-flare hero-flare-active"></div>
       </div>
 
-      <!-- Cyber Vertical Action Dock (Khusus Beranda Saja) -->
-      <aside class="beranda-cyber-dock" aria-label="Menu Aksi Cyber Beranda">
-        <div class="beranda-cyber-dock-inner">
-          <!-- Cyber Digital Clock (Format 00.00 am/pm) -->
-          <div class="cyber-clock-box">
-            <span class="cyber-clock-time" id="cyber-clock-display">12.00 pm</span>
-            <span class="cyber-clock-tag">KATAGIRI</span>
+      <!-- Cyber HUD (Khusus Beranda Saja - Pojok Kanan Atas) -->
+      <div class="beranda-cyber-hud" aria-label="HUD Aksi Cyber Beranda">
+        <aside class="beranda-cyber-dock" aria-label="Menu Aksi Cyber Beranda">
+          <div class="beranda-cyber-dock-inner">
+            <!-- Cyber Digital Clock (Format 00.00 am/pm) -->
+            <div class="cyber-clock-box">
+              <span class="cyber-clock-time" id="cyber-clock-display">12.00 pm</span>
+              <span class="cyber-clock-tag">KATAGIRI</span>
+            </div>
+
+            <div class="cyber-dock-divider" aria-hidden="true"></div>
+
+            <!-- Action Buttons: 2 Columns Grid Format -->
+            <div class="cyber-dock-actions-grid" role="toolbar" aria-label="Aksi Cepat Beranda">
+              <!-- 1. Tombol Setting Interaktif -->
+              <button type="button" class="cyber-dock-btn" id="btn-cyber-settings" title="Pengaturan Beranda" aria-label="Pengaturan Beranda">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <circle cx="12" cy="12" r="3"></circle>
+                  <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+                </svg>
+              </button>
+
+              <!-- 2. Tombol Ganti Musik -->
+              <button type="button" class="cyber-dock-btn" id="btn-cyber-music" title="Ganti Musik Latar" aria-label="Ganti Musik Latar">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M9 18V5l12-2v13"></path>
+                  <circle cx="6" cy="18" r="3"></circle>
+                  <circle cx="18" cy="16" r="3"></circle>
+                </svg>
+              </button>
+
+              <!-- 3. Tombol Ganti Background Image Beranda -->
+              <button type="button" class="cyber-dock-btn" id="btn-cyber-bg" title="Ganti Wallpaper Beranda" aria-label="Ganti Wallpaper Beranda">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                  <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                  <polyline points="21 15 16 10 5 21"></polyline>
+                </svg>
+              </button>
+
+              <!-- 4. Tombol Email (Pop-Up Kontak & Alamat) -->
+              <button type="button" class="cyber-dock-btn" id="btn-cyber-email" title="Informasi Email & Alamat" aria-label="Informasi Email & Alamat">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                  <polyline points="22,6 12,13 2,6"></polyline>
+                </svg>
+              </button>
+            </div>
           </div>
+        </aside>
 
-          <div class="cyber-dock-divider" aria-hidden="true"></div>
-
-          <!-- Action Buttons (Icon Only) -->
-          <div class="cyber-dock-actions" role="toolbar" aria-label="Aksi Cepat Beranda">
-            <!-- 1. Tombol Setting Interaktif -->
-            <button type="button" class="cyber-dock-btn" id="btn-cyber-settings" title="Pengaturan Beranda" aria-label="Pengaturan Beranda">
-              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <circle cx="12" cy="12" r="3"></circle>
-                <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
-              </svg>
-            </button>
-
-            <!-- 2. Tombol Ganti Musik -->
-            <button type="button" class="cyber-dock-btn" id="btn-cyber-music" title="Ganti Musik Latar" aria-label="Ganti Musik Latar">
-              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <path d="M9 18V5l12-2v13"></path>
-                <circle cx="6" cy="18" r="3"></circle>
-                <circle cx="18" cy="16" r="3"></circle>
-              </svg>
-            </button>
-
-            <!-- 3. Tombol Ganti Background Image Beranda -->
-            <button type="button" class="cyber-dock-btn" id="btn-cyber-bg" title="Ganti Wallpaper Beranda" aria-label="Ganti Wallpaper Beranda">
-              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
-                <circle cx="8.5" cy="8.5" r="1.5"></circle>
-                <polyline points="21 15 16 10 5 21"></polyline>
-              </svg>
-            </button>
-
-            <!-- 4. Tombol Email (Pop-Up Kontak & Alamat) -->
-            <button type="button" class="cyber-dock-btn" id="btn-cyber-email" title="Informasi Email & Alamat" aria-label="Informasi Email & Alamat">
-              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
-                <polyline points="22,6 12,13 2,6"></polyline>
-              </svg>
-            </button>
-          </div>
-
-          <!-- Bottom Micro Status Indicator -->
-          <div class="cyber-dock-status" aria-hidden="true">
-            <span class="cyber-pulse-dot"></span>
-          </div>
-        </div>
-
-        <!-- Pop-Up Kecil Email & Alamat Tepat di Beranda -->
+        <!-- Pop-Up Kecil Email & Alamat (Sibling unclipped agar muncul sempurna) -->
         <div class="cyber-info-popup" id="cyber-email-popup" role="dialog" aria-label="Informasi Kontak & Alamat" style="display: none;">
           <div class="cyber-popup-header">
             <span class="cyber-popup-badge">KONTAK RESMI</span>
@@ -273,7 +270,7 @@
           </div>
         </div>
 
-        <!-- Pop-Up Kecil Pengaturan Beranda -->
+        <!-- Pop-Up Kecil Pengaturan Beranda (Sibling unclipped) -->
         <div class="cyber-info-popup" id="cyber-settings-popup" role="dialog" aria-label="Pengaturan Beranda" style="display: none;">
           <div class="cyber-popup-header">
             <span class="cyber-popup-badge">PENGATURAN BERANDA</span>
@@ -288,9 +285,13 @@
               <span>Kamera Sinematik Awal</span>
               <button type="button" class="cyber-toggle-btn active" id="toggle-camera-btn">Aktif</button>
             </div>
+            <div class="cyber-setting-toggle">
+              <span>Musik & Suara Latar</span>
+              <button type="button" class="cyber-toggle-btn" id="toggle-bgm-btn">Nonaktif</button>
+            </div>
           </div>
         </div>
-      </aside>
+      </div>
     </section>
 
     <!-- ====================================================================

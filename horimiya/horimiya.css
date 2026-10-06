@@ -2640,47 +2640,49 @@ section.screen-slide {
 }
 
 /* ==========================================================================
-   BERANDA CYBER VERTICAL ACTION DOCK (Khusus Slide 1 Beranda Saja)
-   - Bentuk persegi panjang vertikal (height tinggi)
-   - 4-corner di-iris (style-cyber) dengan outline presisi tanpa terpotong
-   - Lebar proporsional (tidak terlalu lebar atau terlalu tipis)
+   BERANDA CYBER ACTION DOCK & HUD (Khusus Slide 1 Beranda Saja)
+   - Berada di dekat corner pojok kanan atas (top: 12px; right: 16px)
+   - Bentuk persegi panjang lebih lebar dengan height lebih pendek (132px x 94px)
+   - Format posisi tombol 2-column grid (2x2) sangat hemat, ramping & presisi
+   - 4-corner di-iris (style-cyber) dengan outline biru langit cerah (#00e5ff) presisi tanpa terpotong
    - Inner-fill berwarna manga-red (#ff1744)
-   - Outline berwarna biru langit cerah (#00e5ff)
    - Jam digital cyber-anime format 00.00 pm/am
-   - Tombol icon-only (Setting, Ganti Musik, Ganti Background, Email Pop-Up)
+   - Pop-up email & pop-up setting unclipped dan muncul seketika saat tombol ditekan
    ========================================================================== */
-.beranda-cyber-dock {
+.beranda-cyber-hud {
   position: absolute;
-  right: 88px;
-  top: 50%;
-  transform: translateY(-50%);
-  z-index: 35;
-  width: 58px;
-  height: 380px;
-  background: #00e5ff; /* Outline berwarna biru langit cerah (#00e5ff) */
-  padding: 1.5px; /* Precision outline following 4-corner chamfer */
-  /* 4-corner iris cut chamfer */
-  clip-path: polygon(
-    12px 0, 
-    calc(100% - 12px) 0, 
-    100% 12px, 
-    100% calc(100% - 12px), 
-    calc(100% - 12px) 100%, 
-    12px 100%, 
-    0 calc(100% - 12px), 
-    0 12px
-  );
-  filter: drop-shadow(0 0 12px rgba(0, 229, 255, 0.65)) drop-shadow(0 6px 20px rgba(0, 0, 0, 0.45));
-  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  top: 12px;
+  right: 16px;
+  z-index: 45;
   user-select: none;
 }
 
 @media (max-width: 768px) {
-  .beranda-cyber-dock {
-    right: 20px;
-    width: 50px;
-    height: 350px;
+  .beranda-cyber-hud {
+    top: 10px;
+    right: 12px;
   }
+}
+
+.beranda-cyber-dock {
+  width: 132px;
+  height: 94px;
+  background: #00e5ff; /* Outline berwarna biru langit cerah (#00e5ff) */
+  padding: 1.5px; /* Precision outline following 4-corner chamfer */
+  box-sizing: border-box;
+  /* 4-corner iris cut chamfer */
+  clip-path: polygon(
+    8px 0, 
+    calc(100% - 8px) 0, 
+    100% 8px, 
+    100% calc(100% - 8px), 
+    calc(100% - 8px) 100%, 
+    8px 100%, 
+    0 calc(100% - 8px), 
+    0 8px
+  );
+  filter: drop-shadow(0 0 10px rgba(0, 229, 255, 0.75)) drop-shadow(0 6px 16px rgba(0, 0, 0, 0.4));
+  transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .beranda-cyber-dock-inner {
@@ -2688,93 +2690,92 @@ section.screen-slide {
   height: 100%;
   background: #ff1744; /* Inner-fill berwarna manga-red (#ff1744) */
   clip-path: polygon(
-    11px 0, 
-    calc(100% - 11px) 0, 
-    100% 11px, 
-    100% calc(100% - 11px), 
-    calc(100% - 11px) 100%, 
-    11px 100%, 
-    0 calc(100% - 11px), 
-    0 11px
+    7px 0, 
+    calc(100% - 7px) 0, 
+    100% 7px, 
+    100% calc(100% - 7px), 
+    calc(100% - 7px) 100%, 
+    7px 100%, 
+    0 calc(100% - 7px), 
+    0 7px
   );
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  padding: 14px 6px 12px;
+  padding: 5px 8px 6px;
   box-sizing: border-box;
 }
 
 /* Cyber Anime Clock */
 .cyber-clock-box {
   display: flex;
-  flex-direction: column;
   align-items: center;
-  justify-content: center;
-  text-align: center;
-  gap: 2px;
-  padding-top: 4px;
+  justify-content: space-between;
+  width: 100%;
+  padding: 0 2px;
+  line-height: 1;
 }
 
 .cyber-clock-time {
   font-family: 'Outfit', 'Courier New', monospace;
-  font-size: 0.65rem;
+  font-size: 0.66rem;
   font-weight: 800;
   color: #ffffff;
-  letter-spacing: 0.03em;
-  line-height: 1.1;
-  text-shadow: 0 0 6px rgba(255, 255, 255, 0.7);
+  letter-spacing: 0.04em;
+  line-height: 1;
+  text-shadow: 0 0 6px rgba(255, 255, 255, 0.75);
   white-space: nowrap;
 }
 
 .cyber-clock-tag {
   font-family: monospace;
-  font-size: 0.48rem;
+  font-size: 0.5rem;
   font-weight: 800;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.1em;
   color: #ffd600; /* Aksen kuning cerah */
   line-height: 1;
 }
 
 .cyber-dock-divider {
-  width: 32px;
-  height: 1.5px;
-  background: rgba(255, 255, 255, 0.4);
+  width: 100%;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.35);
   border-radius: 1px;
-  margin: 6px 0;
+  margin: 2px 0 4px;
 }
 
-/* Action Buttons Container */
-.cyber-dock-actions {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 12px;
+/* 2-Column Buttons Grid */
+.cyber-dock-actions-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 5px;
   width: 100%;
+  justify-items: center;
 }
 
 .cyber-dock-btn {
-  width: 38px;
-  height: 38px;
-  border-radius: 9px;
-  border: 1.5px solid rgba(255, 255, 255, 0.45);
-  background: rgba(0, 0, 0, 0.22);
+  width: 53px;
+  height: 27px;
+  border-radius: 5px;
+  border: 1px solid rgba(255, 255, 255, 0.45);
+  background: rgba(0, 0, 0, 0.28);
   color: #ffffff;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
   padding: 0;
-  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  transition: all 0.18s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25);
 }
 
 .cyber-dock-btn:hover {
   background: #ffffff;
   color: #ff1744;
   border-color: #00e5ff;
-  transform: scale(1.1);
-  box-shadow: 0 0 12px rgba(0, 229, 255, 0.85);
+  transform: scale(1.06);
+  box-shadow: 0 0 10px rgba(0, 229, 255, 0.85);
 }
 
 .cyber-dock-btn:active {
@@ -2786,59 +2787,38 @@ section.screen-slide {
 }
 
 .cyber-dock-btn:hover svg {
-  transform: scale(1.05);
+  transform: scale(1.08);
 }
 
-/* Micro Status Indicator */
-.cyber-dock-status {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding-bottom: 2px;
-}
-
-.cyber-pulse-dot {
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-  background: #00e5ff;
-  box-shadow: 0 0 8px #00e5ff;
-  animation: cyber-dot-blink 1.8s infinite ease-in-out;
-}
-
-@keyframes cyber-dot-blink {
-  0%, 100% { opacity: 0.4; transform: scale(0.85); }
-  50% { opacity: 1; transform: scale(1.25); box-shadow: 0 0 12px #00e5ff; }
-}
-
-/* Pop-Up Kecil Email & Setting di Beranda */
+/* Pop-Up Kecil Email & Setting di Beranda (Muncul tepat di bawah HUD, unclipped) */
 .cyber-info-popup {
   position: absolute;
-  right: calc(100% + 14px);
-  top: 50%;
-  transform: translateY(-50%);
-  width: 270px;
+  top: calc(100% + 8px);
+  right: 0;
+  width: 280px;
+  max-width: calc(100vw - 28px);
   background: #ffffff;
   border: 1.5px solid #00e5ff;
   padding: 12px 14px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4), 0 0 14px rgba(0, 229, 255, 0.4);
-  z-index: 50;
+  box-sizing: border-box;
+  z-index: 60;
   clip-path: polygon(
-    10px 0, 
-    calc(100% - 10px) 0, 
-    100% 10px, 
-    100% calc(100% - 10px), 
-    calc(100% - 10px) 100%, 
-    10px 100%, 
-    0 calc(100% - 10px), 
-    0 10px
+    8px 0, 
+    calc(100% - 8px) 0, 
+    100% 8px, 
+    100% calc(100% - 8px), 
+    calc(100% - 8px) 100%, 
+    8px 100%, 
+    0 calc(100% - 8px), 
+    0 8px
   );
-  animation: popup-fade-in 0.22s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  filter: drop-shadow(0 12px 28px rgba(0, 0, 0, 0.45)) drop-shadow(0 0 10px rgba(0, 229, 255, 0.4));
+  animation: popup-fade-down 0.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
-@keyframes popup-fade-in {
-  from { opacity: 0; transform: translateY(-50%) translateX(10px); }
-  to { opacity: 1; transform: translateY(-50%) translateX(0); }
+@keyframes popup-fade-down {
+  from { opacity: 0; transform: translateY(-8px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 .cyber-popup-header {

@@ -1652,7 +1652,7 @@ function initPolaroidWishingStudio() {
 }
 
 /* ==========================================================================
-   BERANDA CYBER VERTICAL ACTION DOCK CONTROLLER (Khusus Beranda Saja)
+   BERANDA CYBER ACTION DOCK & HUD CONTROLLER (Khusus Beranda Saja)
    ========================================================================== */
 function initBerandaCyberDock() {
   const dock = document.querySelector('.beranda-cyber-dock');
@@ -1674,39 +1674,63 @@ function initBerandaCyberDock() {
   updateClock();
   setInterval(updateClock, 1000);
 
-  // Popups
+  // Popups Elements
   const emailPopup = document.getElementById('cyber-email-popup');
   const settingsPopup = document.getElementById('cyber-settings-popup');
   const btnCloseEmail = document.getElementById('btn-close-email-popup');
   const btnCloseSettings = document.getElementById('btn-close-settings-popup');
 
   function closeAllPopups() {
-    if (emailPopup) emailPopup.style.display = 'none';
-    if (settingsPopup) settingsPopup.style.display = 'none';
+    if (emailPopup) {
+      emailPopup.style.display = 'none';
+      emailPopup.classList.remove('active');
+    }
+    if (settingsPopup) {
+      settingsPopup.style.display = 'none';
+      settingsPopup.classList.remove('active');
+    }
   }
 
+  function togglePopup(targetPopup) {
+    if (!targetPopup) return;
+    const isVisible = targetPopup.style.display === 'block' || targetPopup.classList.contains('active');
+    closeAllPopups();
+    if (!isVisible) {
+      targetPopup.style.display = 'block';
+      targetPopup.classList.add('active');
+    }
+  }
+
+  // Prevent clicks inside popup elements from closing themselves
+  [emailPopup, settingsPopup].forEach((pop) => {
+    if (pop) {
+      pop.addEventListener('click', (e) => {
+        e.stopPropagation();
+      });
+    }
+  });
+
+  // Close buttons
   if (btnCloseEmail) {
-    btnCloseEmail.addEventListener('click', () => {
-      if (emailPopup) emailPopup.style.display = 'none';
+    btnCloseEmail.addEventListener('click', (e) => {
+      e.stopPropagation();
+      closeAllPopups();
     });
   }
 
   if (btnCloseSettings) {
-    btnCloseSettings.addEventListener('click', () => {
-      if (settingsPopup) settingsPopup.style.display = 'none';
+    btnCloseSettings.addEventListener('click', (e) => {
+      e.stopPropagation();
+      closeAllPopups();
     });
   }
 
-  // 1. Settings Button
+  // 1. Settings Button (Buka / Tutup Pop-Up Pengaturan)
   const btnSettings = document.getElementById('btn-cyber-settings');
   if (btnSettings) {
     btnSettings.addEventListener('click', (e) => {
       e.stopPropagation();
-      const isVisible = settingsPopup && settingsPopup.style.display !== 'none';
-      closeAllPopups();
-      if (!isVisible && settingsPopup) {
-        settingsPopup.style.display = 'block';
-      }
+      togglePopup(settingsPopup);
     });
   }
 
@@ -1770,23 +1794,20 @@ function initBerandaCyberDock() {
     });
   }
 
-  // 4. Email Button
+  // 4. Email Button (Buka / Tutup Pop-Up Kontak & Alamat)
   const btnEmail = document.getElementById('btn-cyber-email');
   if (btnEmail) {
     btnEmail.addEventListener('click', (e) => {
       e.stopPropagation();
-      const isVisible = emailPopup && emailPopup.style.display !== 'none';
-      closeAllPopups();
-      if (!isVisible && emailPopup) {
-        emailPopup.style.display = 'block';
-      }
+      togglePopup(emailPopup);
     });
   }
 
   // Copy Email Button
   const btnCopyEmail = document.getElementById('btn-copy-email');
   if (btnCopyEmail) {
-    btnCopyEmail.addEventListener('click', () => {
+    btnCopyEmail.addEventListener('click', (e) => {
+      e.stopPropagation();
       const email = 'cariearsa05@gmail.com';
       if (navigator.clipboard) {
         navigator.clipboard.writeText(email).then(() => {
@@ -1794,7 +1815,9 @@ function initBerandaCyberDock() {
           setTimeout(() => {
             btnCopyEmail.textContent = 'Salin';
           }, 2000);
-        }).catch(() => {});
+        }).catch(() => {
+          btnCopyEmail.textContent = 'cariearsa05@gmail.com';
+        });
       }
     });
   }
@@ -1803,7 +1826,8 @@ function initBerandaCyberDock() {
   const toggleSakuraBtn = document.getElementById('toggle-sakura-btn');
   const leavesCanvas = document.getElementById('leaves-canvas');
   if (toggleSakuraBtn) {
-    toggleSakuraBtn.addEventListener('click', () => {
+    toggleSakuraBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
       const isActive = toggleSakuraBtn.classList.toggle('active');
       toggleSakuraBtn.textContent = isActive ? 'Aktif' : 'Nonaktif';
       if (leavesCanvas) {
@@ -1814,7 +1838,8 @@ function initBerandaCyberDock() {
 
   const toggleCameraBtn = document.getElementById('toggle-camera-btn');
   if (toggleCameraBtn) {
-    toggleCameraBtn.addEventListener('click', () => {
+    toggleCameraBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
       const isActive = toggleCameraBtn.classList.toggle('active');
       toggleCameraBtn.textContent = isActive ? 'Aktif' : 'Nonaktif';
       if (heroImg) {
@@ -1827,9 +1852,34 @@ function initBerandaCyberDock() {
     });
   }
 
-  // Dismiss popups on click outside
+  const toggleBgmBtn = document.getElementById('toggle-bgm-btn');
+  const audioBtn = document.getElementById('audio-player-toggle-btn');
+  if (toggleBgmBtn) {
+    toggleBgmBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      if (audioBtn) {
+        audioBtn.click();
+        const isPlaying = audioBtn.getAttribute('aria-pressed') === 'true' || audioBtn.classList.contains('playing');
+        toggleBgmBtn.classList.toggle('active', isPlaying);
+        toggleBgmBtn.textContent = isPlaying ? 'Aktif' : 'Nonaktif';
+      } else {
+        const isActive = toggleBgmBtn.classList.toggle('active');
+        toggleBgmBtn.textContent = isActive ? 'Aktif' : 'Nonaktif';
+      }
+    });
+  }
+
+  // Dismiss popups on click outside the HUD
   document.addEventListener('click', (e) => {
-    if (dock && !dock.contains(e.target)) {
+    const hud = document.querySelector('.beranda-cyber-hud');
+    if (hud && !hud.contains(e.target)) {
+      closeAllPopups();
+    }
+  });
+
+  // Dismiss on Escape key
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
       closeAllPopups();
     }
   });
