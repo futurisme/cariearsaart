@@ -1,4 +1,33 @@
 :root {
+  /* ==========================================================================
+     CORE DESIGN TOKENS (Modern 2026-10-07 Architecture)
+     Manga, Cyber, High-Contrast & High-Performance Palette
+     ========================================================================== */
+  --color-manga-red: #ff1744;
+  --color-manga-red-dark: #d50000;
+  --color-manga-red-glow: rgba(255, 23, 68, 0.65);
+
+  --color-cyber-cyan: #00e5ff;
+  --color-cyber-cyan-dark: #00b0ff;
+  --color-cyber-cyan-glow: rgba(0, 229, 255, 0.75);
+
+  --color-cyber-yellow: #ffd600;
+  --color-cyber-yellow-glow: rgba(255, 214, 0, 0.65);
+
+  --color-deep-black: #000000;
+  --color-pure-white: #ffffff;
+  --color-obsidian: #0b132b;
+  --color-obsidian-glass: rgba(11, 19, 43, 0.92);
+
+  --color-slate-subtle: #475569;
+  --color-slate-light: #94a3b8;
+  --color-slate-bg: #f8fafc;
+  --color-slate-border: #e2e8f0;
+
+  /* Standard Motion Easing Curves */
+  --ease-cyber: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+
   /* Traditional Japanese Wa-iro & Horimiya Spring Palette */
   --washi-bg: #fcfbf9;
   --glass-card: rgba(255, 255, 255, 0.65);
@@ -163,7 +192,7 @@ html, body {
   align-items: center;
   justify-content: center;
   padding: 1.5px; /* Menghasilkan outline manga-red solid tanpa terpotong */
-  background: #ff1744; /* Outline berwarna manga-red */
+  background: var(--color-manga-red); /* Outline berwarna manga-red */
   /* Irisan corner kiri dan kanan bawah mengeruncing curam */
   clip-path: polygon(0 0, 100% 0, 100% calc(100% - 15px), calc(100% - 13px) 100%, 13px 100%, 0 calc(100% - 15px));
   filter: drop-shadow(0 0 10px rgba(255, 23, 68, 0.45)) drop-shadow(0 4px 14px rgba(11, 19, 43, 0.15));
@@ -195,7 +224,7 @@ html, body {
 }
 
 .brand-badge-link:hover .brand-badge-inner {
-  background: #ffffff;
+  background: var(--color-pure-white);
 }
 
 .brand-badge-text {
@@ -212,7 +241,7 @@ html, body {
 
 /* CARIEARSA: Manga-Red */
 .brand-badge-text .brand-text-manga {
-  color: #ff1744;
+  color: var(--color-manga-red);
   text-shadow: 0 0 10px rgba(255, 23, 68, 0.25);
   margin-right: 0.03em;
   transition: color 0.2s ease;
@@ -220,17 +249,17 @@ html, body {
 
 /* .ART: Hitam Pekat */
 .brand-badge-text .brand-text-black {
-  color: #000000;
+  color: var(--color-deep-black);
   transition: color 0.2s ease;
 }
 
 .brand-badge-link:hover .brand-text-manga {
-  color: #ff1744;
+  color: var(--color-manga-red);
   text-shadow: 0 0 12px rgba(255, 23, 68, 0.35);
 }
 
 .brand-badge-link:hover .brand-text-black {
-  color: #000000;
+  color: var(--color-deep-black);
 }
 
 /* ==========================================================================
@@ -412,7 +441,7 @@ section.screen-slide {
   left: 50%;
   transform: translateX(-50%);
   z-index: 55;
-  background: #ffffff; /* Warna outline bottombar overlay putih cerah */
+  background: var(--color-pure-white); /* Warna outline bottombar overlay putih cerah */
   padding: 1.5px; /* Precision outline hugging the chamfered 4 corners */
   clip-path: polygon(
     9px 0, 
@@ -425,7 +454,7 @@ section.screen-slide {
     0 9px
   );
   filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.65)) drop-shadow(0 6px 18px rgba(0, 0, 0, 0.7));
-  transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: all 0.22s var(--ease-cyber);
 }
 
 .horizontal-tracker-dock:hover {
@@ -436,7 +465,7 @@ section.screen-slide {
   display: flex;
   align-items: center;
   gap: 10px;
-  background: #ff1744; /* Inner-fill manga-red */
+  background: var(--color-manga-red); /* Inner-fill manga-red */
   padding: 3px 12px; /* Slimmer, compact/rapat height */
   clip-path: polygon(
     8px 0, 
@@ -451,13 +480,13 @@ section.screen-slide {
 }
 
 .slide-counter {
-  font-family: 'Outfit', var(--font-sans), sans-serif;
+  font-family: var(--font-sans);
   font-size: 0.78rem;
   font-weight: 800;
-  color: #ffffff; /* Text 01/09 warna putih cerah */
+  color: var(--color-pure-white); /* Text 01/09 warna putih cerah */
   letter-spacing: 0.08em;
   padding-right: 8px;
-  border-right: 1.5px solid #ffffff; /* Garis pemisah/pembatas nomor warna putih cerah */
+  border-right: 1.5px solid var(--color-pure-white); /* Garis pemisah/pembatas nomor warna putih cerah */
   text-shadow: 0 0 4px rgba(255, 255, 255, 0.5);
   line-height: 1;
 }
@@ -473,12 +502,12 @@ section.screen-slide {
   width: 9px;
   height: 9px;
   border-radius: 50%;
-  background: #ffd600; /* Bagian tengah lingkaran indikator warna kuning cerah */
-  border: 1.8px solid #ffffff; /* Bagian pinggiran lingkaran indikator warna putih cerah */
+  background: var(--color-cyber-yellow); /* Bagian tengah lingkaran indikator warna kuning cerah */
+  border: 1.8px solid var(--color-pure-white); /* Bagian pinggiran lingkaran indikator warna putih cerah */
   box-sizing: border-box;
   box-shadow: 0 0 4px rgba(255, 255, 255, 0.7);
   cursor: pointer;
-  transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: all 0.22s var(--ease-cyber);
   position: relative;
   padding: 0;
   margin: 0;
@@ -491,12 +520,12 @@ section.screen-slide {
 
 /* Lingkaran Aktif: Tetap memanjang horizontal, warna tetap konsisten (tengah kuning cerah, pinggir putih cerah) */
 .horizontal-dot.active {
-  background: #ffd600; /* Tengah tetap warna kuning cerah konsisten */
-  border: 2px solid #ffffff; /* Pinggir tetap warna putih cerah konsisten */
+  background: var(--color-cyber-yellow); /* Tengah tetap warna kuning cerah konsisten */
+  border: 2px solid var(--color-pure-white); /* Pinggir tetap warna putih cerah konsisten */
   width: 26px; /* Tetap memanjang horizontal */
   height: 9px;
   border-radius: 9999px;
-  box-shadow: 0 0 8px rgba(255, 255, 255, 0.9), 0 0 5px rgba(255, 214, 0, 0.7);
+  box-shadow: 0 0 8px rgba(255, 255, 255, 0.9), 0 0 5px var(--color-cyber-yellow-glow);
 }
 
 .horizontal-dot::before {
@@ -505,9 +534,9 @@ section.screen-slide {
   bottom: 22px;
   left: 50%;
   transform: translateX(-50%) translateY(4px);
-  background: #000000;
-  color: #ffffff;
-  border: 1px solid #ffffff;
+  background: var(--color-deep-black);
+  color: var(--color-pure-white);
+  border: 1px solid var(--color-pure-white);
   padding: 3px 8px;
   border-radius: 4px;
   font-size: 0.68rem;
@@ -539,7 +568,7 @@ section.screen-slide {
   bottom: 16px;
   left: 24px;
   z-index: 60;
-  background: #ff1744; /* Outline box manga-red */
+  background: var(--color-manga-red); /* Outline box manga-red */
   padding: 1.5px; /* Precision outline hugging the cyber-chamfered corners */
   /* Corner kiri atas dan kanan bawah di-iris (style cyber) */
   clip-path: polygon(
@@ -551,14 +580,14 @@ section.screen-slide {
     0 10px
   );
   filter: drop-shadow(0 0 10px rgba(255, 23, 68, 0.45)) drop-shadow(0 4px 14px rgba(11, 19, 43, 0.16));
-  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: all 0.2s var(--ease-cyber);
 }
 
 .audio-dock-inner {
   display: flex;
   align-items: center;
   gap: 8px;
-  background: #ffffff; /* Inner-fill box putih cerah */
+  background: var(--color-pure-white); /* Inner-fill box putih cerah */
   padding: 3.5px 12px 3.5px 6px; /* Gaya lebih ramping dan tipis */
   /* Matching inner clip-path */
   clip-path: polygon(
@@ -572,8 +601,8 @@ section.screen-slide {
 }
 
 .audio-play-btn {
-  background: #ff1744; /* Tombol player berwarna manga-red */
-  color: #ffffff;
+  background: var(--color-manga-red); /* Tombol player berwarna manga-red */
+  color: var(--color-pure-white);
   border: none;
   width: 25px; /* Lebih ramping dan tipis */
   height: 25px;
@@ -593,14 +622,14 @@ section.screen-slide {
 }
 
 .audio-play-btn svg {
-  fill: #ffffff; /* Akses segitiga play putih cerah */
+  fill: var(--color-pure-white); /* Akses segitiga play putih cerah */
 }
 
 .audio-title {
   font-family: var(--font-sans);
   font-size: 0.74rem;
   font-weight: 800;
-  color: #000000; /* Judul musik hitam pekat */
+  color: var(--color-deep-black); /* Judul musik hitam pekat */
   line-height: 1;
   letter-spacing: 0.02em;
   white-space: nowrap;
@@ -618,7 +647,7 @@ section.screen-slide {
 
 .audio-bar {
   width: 2.5px;
-  background: #ff1744; /* Visualizer / spektrum wave berwarna manga-red */
+  background: var(--color-manga-red); /* Visualizer / spektrum wave berwarna manga-red */
   border-radius: 1px;
   height: 3px;
   transition: height 0.15s;
@@ -647,13 +676,13 @@ section.screen-slide {
   position: fixed;
   inset: 0;
   z-index: 999999;
-  background: #ff1744; /* Inner-fill background loading manga-red */
+  background: var(--color-manga-red); /* Inner-fill background loading manga-red */
   display: flex;
   align-items: center;
   justify-content: center;
   opacity: 1;
   visibility: visible;
-  transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.4s;
+  transition: opacity 0.4s var(--ease-cyber), visibility 0.4s;
   pointer-events: all;
 }
 
@@ -667,7 +696,7 @@ section.screen-slide {
 .loading-animation-shell {
   width: 350px;
   max-width: calc(100vw - 36px);
-  background: #000000; /* Outline card loading berwarna hitam pekat */
+  background: var(--color-deep-black); /* Outline card loading berwarna hitam pekat */
   padding: 2px; /* Presisi ketebalan outline mengikuti bentuk */
   box-sizing: border-box;
   /* Corner atas kiri dan corner kanan bawah di-iris (style-cyber) */
@@ -692,7 +721,7 @@ section.screen-slide {
 .loading-animation-inner {
   width: 100%;
   height: 100%;
-  background: #ffffff; /* Inner-fill card loading berwarna putih cerah */
+  background: var(--color-pure-white); /* Inner-fill card loading berwarna putih cerah */
   clip-path: polygon(
     20px 0, 
     100% 0, 
@@ -724,8 +753,8 @@ section.screen-slide {
   inset: 0;
   border-radius: 50%;
   border: 2.5px solid rgba(0, 0, 0, 0.12);
-  border-top-color: #000000;
-  border-right-color: #ff1744;
+  border-top-color: var(--color-deep-black);
+  border-right-color: var(--color-manga-red);
   animation: cyber-spin 0.85s linear infinite;
 }
 
@@ -733,7 +762,7 @@ section.screen-slide {
   width: 24px;
   height: 24px;
   border-radius: 50%;
-  border: 2px dashed #ff1744;
+  border: 2px dashed var(--color-manga-red);
   animation: cyber-spin-reverse 1.3s linear infinite;
 }
 
@@ -742,7 +771,7 @@ section.screen-slide {
   width: 7px;
   height: 7px;
   border-radius: 50%;
-  background: #000000;
+  background: var(--color-deep-black);
 }
 
 @keyframes cyber-spin {
@@ -761,19 +790,19 @@ section.screen-slide {
 }
 
 .loading-title-text {
-  font-family: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-family: var(--font-sans);
   font-size: 1.05rem;
   font-weight: 900;
   letter-spacing: 0.12em;
-  color: #000000; /* Text LOADING ANIMATIONS berwarna hitam pekat */
+  color: var(--color-deep-black); /* Text LOADING ANIMATIONS berwarna hitam pekat */
   line-height: 1;
 }
 
 .loading-sub-text {
-  font-family: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-family: var(--font-sans);
   font-size: 0.82rem;
   font-weight: 600;
-  color: #475569;
+  color: var(--color-slate-subtle);
   letter-spacing: 0.05em;
   text-align: center;
   line-height: 1.2;
@@ -782,7 +811,7 @@ section.screen-slide {
 .loading-bar-track {
   width: 100%;
   height: 5px;
-  background: #f1f5f9;
+  background: var(--color-slate-bg);
   border: 1px solid rgba(0, 0, 0, 0.08);
   border-radius: 9999px;
   overflow: hidden;
@@ -793,7 +822,7 @@ section.screen-slide {
 .loading-bar-fill {
   height: 100%;
   width: 15%;
-  background: linear-gradient(90deg, #000000 0%, #ff1744 100%);
+  background: linear-gradient(90deg, var(--color-deep-black) 0%, var(--color-manga-red) 100%);
   border-radius: 9999px;
   transition: width 0.25s ease-out;
 }
@@ -2689,7 +2718,7 @@ section.screen-slide {
 .beranda-cyber-dock {
   width: 132px;
   height: 94px;
-  background: #00e5ff; /* Outline berwarna biru langit cerah (#00e5ff) */
+  background: var(--color-cyber-cyan); /* Outline berwarna biru langit cerah */
   padding: 1.5px; /* Precision outline following 4-corner chamfer */
   box-sizing: border-box;
   /* 4-corner iris cut chamfer */
@@ -2704,13 +2733,13 @@ section.screen-slide {
     0 8px
   );
   filter: drop-shadow(0 0 10px rgba(0, 229, 255, 0.75)) drop-shadow(0 6px 16px rgba(0, 0, 0, 0.4));
-  transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: all 0.22s var(--ease-cyber);
 }
 
 .beranda-cyber-dock-inner {
   width: 100%;
   height: 100%;
-  background: #ff1744; /* Inner-fill berwarna manga-red (#ff1744) */
+  background: var(--color-manga-red); /* Inner-fill berwarna manga-red */
   clip-path: polygon(
     7px 0, 
     calc(100% - 7px) 0, 
@@ -2740,10 +2769,10 @@ section.screen-slide {
 }
 
 .cyber-clock-time {
-  font-family: 'Outfit', 'Courier New', monospace;
+  font-family: var(--font-sans);
   font-size: 0.66rem;
   font-weight: 800;
-  color: #ffffff;
+  color: var(--color-pure-white);
   letter-spacing: 0.04em;
   line-height: 1;
   text-shadow: 0 0 6px rgba(255, 255, 255, 0.75);
@@ -2755,7 +2784,7 @@ section.screen-slide {
   font-size: 0.5rem;
   font-weight: 800;
   letter-spacing: 0.1em;
-  color: #ffd600; /* Aksen kuning cerah */
+  color: var(--color-cyber-yellow); /* Aksen kuning cerah */
   line-height: 1;
 }
 
@@ -2782,20 +2811,20 @@ section.screen-slide {
   border-radius: 5px;
   border: 1px solid rgba(255, 255, 255, 0.45);
   background: rgba(0, 0, 0, 0.28);
-  color: #ffffff;
+  color: var(--color-pure-white);
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
   padding: 0;
-  transition: all 0.18s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: all 0.18s var(--ease-cyber);
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25);
 }
 
 .cyber-dock-btn:hover {
-  background: #ffffff;
-  color: #ff1744;
-  border-color: #00e5ff;
+  background: var(--color-pure-white);
+  color: var(--color-manga-red);
+  border-color: var(--color-cyber-cyan);
   transform: scale(1.06);
   box-shadow: 0 0 10px rgba(0, 229, 255, 0.85);
 }
@@ -2819,8 +2848,8 @@ section.screen-slide {
   right: 0;
   width: 280px;
   max-width: calc(100vw - 28px);
-  background: #ffffff;
-  border: 1.5px solid #00e5ff;
+  background: var(--color-pure-white);
+  border: 1.5px solid var(--color-cyber-cyan);
   padding: 12px 14px;
   box-sizing: border-box;
   z-index: 60;
@@ -2835,7 +2864,7 @@ section.screen-slide {
     0 8px
   );
   filter: drop-shadow(0 12px 28px rgba(0, 0, 0, 0.45)) drop-shadow(0 0 10px rgba(0, 229, 255, 0.4));
-  animation: popup-fade-down 0.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation: popup-fade-down 0.2s var(--ease-cyber) forwards;
 }
 
 @keyframes popup-fade-down {
@@ -2960,6 +2989,133 @@ section.screen-slide {
 }
 
 .cyber-toggle-btn.active {
-  background: #ff1744;
-  color: #ffffff;
+  background: var(--color-manga-red);
+  color: var(--color-pure-white);
+}
+
+/* ==========================================================================
+   CROSS-DEVICE, ULTRA-WIDE, SMART TV & 4K DISPLAY COMPATIBILITY (2026-10-07)
+   - 4K / UHD / Smart TV / Ultrawide (>= 2000px): Proporsi harmonis & anti-pecah
+   - Compact Laptops (height <= 768px): Padding adaptif anti-overflow
+   ========================================================================== */
+
+/* 4K UHD & Smart TV Widescreen Displays */
+@media (min-width: 2160px) {
+  :root {
+    font-size: 18px;
+  }
+
+  section.screen-slide {
+    padding: 64px 88px 56px;
+  }
+
+  .morph-showcase-container {
+    max-width: 1480px;
+  }
+
+  .interactive-split-grid {
+    max-width: 1540px;
+    gap: 36px;
+  }
+
+  .beranda-cyber-hud {
+    top: 24px;
+    right: 32px;
+  }
+
+  .beranda-cyber-dock {
+    width: 156px;
+    height: 112px;
+  }
+
+  .cyber-dock-btn {
+    width: 64px;
+    height: 32px;
+  }
+
+  .cyber-info-popup {
+    width: 320px;
+  }
+
+  .horizontal-tracker-dock {
+    bottom: 24px;
+  }
+
+  .audio-dock {
+    bottom: 24px;
+    left: 32px;
+  }
+}
+
+/* 1440p QHD Displays (2560x1440) */
+@media (min-width: 1921px) and (max-width: 2159px) {
+  :root {
+    font-size: 16.5px;
+  }
+
+  section.screen-slide {
+    padding: 52px 72px 48px;
+  }
+
+  .morph-showcase-container {
+    max-width: 1300px;
+  }
+
+  .interactive-split-grid {
+    max-width: 1380px;
+  }
+}
+
+/* Compact Laptop & Low-Height Displays (Height <= 768px) */
+@media (max-height: 768px) and (min-width: 769px) {
+  section.screen-slide {
+    padding: 30px 48px 32px;
+  }
+
+  .morph-stage-grid {
+    height: clamp(320px, 46vh, 440px);
+  }
+
+  .interactive-split-grid {
+    gap: 16px;
+  }
+
+  .turntable-chassis {
+    height: 280px;
+  }
+
+  .polaroid-frame-stage {
+    max-width: 240px;
+  }
+
+  .sky-ribbons-viewport {
+    height: 135px;
+  }
+
+  .morph-stats-card,
+  .turntable-card,
+  .keepsake-card,
+  .wishing-card,
+  .piercing-anatomy-card,
+  .bakery-studio-card {
+    padding: 14px 18px;
+  }
+}
+
+/* Print Optimization */
+@media print {
+  .sakura-flank-trees,
+  #leaves-canvas,
+  .horizontal-tracker-dock,
+  .audio-dock,
+  .beranda-cyber-hud,
+  #beranda-loading-screen {
+    display: none !important;
+  }
+
+  section.screen-slide {
+    width: 100% !important;
+    height: auto !important;
+    page-break-after: always;
+  }
 }

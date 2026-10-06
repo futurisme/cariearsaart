@@ -28,10 +28,14 @@ export function initPetalsEngine() {
   resizeCanvas();
 
   let resizeDebounce = null;
-  window.addEventListener('resize', () => {
-    clearTimeout(resizeDebounce);
-    resizeDebounce = setTimeout(resizeCanvas, 150);
-  });
+  window.addEventListener(
+    'resize',
+    () => {
+      clearTimeout(resizeDebounce);
+      resizeDebounce = setTimeout(resizeCanvas, 150);
+    },
+    { passive: true }
+  );
 
   // Pre-cached crisp petal sprites on offscreen canvases
   // Enhanced palette with rich Pink & Sky-Blue variations (Sora-iro & Sakura)

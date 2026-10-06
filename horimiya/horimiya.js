@@ -630,6 +630,8 @@ function initMorphChamber() {
       divider.setAttribute('aria-valuenow', Math.round(pct).toString());
     }
 
+    let rafMoveId = null;
+
     divider.addEventListener('mousedown', (e) => {
       isDragging = true;
       e.preventDefault();
@@ -638,25 +640,56 @@ function initMorphChamber() {
 
     window.addEventListener('mouseup', () => {
       isDragging = false;
+      if (rafMoveId) {
+        cancelAnimationFrame(rafMoveId);
+        rafMoveId = null;
+      }
     });
 
-    window.addEventListener('mousemove', (e) => {
-      if (isDragging) setSplit(e.clientX);
-    });
+    window.addEventListener(
+      'mousemove',
+      (e) => {
+        if (!isDragging) return;
+        if (rafMoveId) return;
+        rafMoveId = requestAnimationFrame(() => {
+          setSplit(e.clientX);
+          rafMoveId = null;
+        });
+      },
+      { passive: true }
+    );
 
     // Touch support
-    divider.addEventListener('touchstart', (e) => {
-      isDragging = true;
-      e.stopPropagation();
-    }, { passive: true });
+    divider.addEventListener(
+      'touchstart',
+      (e) => {
+        isDragging = true;
+        e.stopPropagation();
+      },
+      { passive: true }
+    );
 
     window.addEventListener('touchend', () => {
       isDragging = false;
+      if (rafMoveId) {
+        cancelAnimationFrame(rafMoveId);
+        rafMoveId = null;
+      }
     });
 
-    window.addEventListener('touchmove', (e) => {
-      if (isDragging && e.touches[0]) setSplit(e.touches[0].clientX);
-    }, { passive: true });
+    window.addEventListener(
+      'touchmove',
+      (e) => {
+        if (!isDragging || !e.touches[0]) return;
+        if (rafMoveId) return;
+        const clientX = e.touches[0].clientX;
+        rafMoveId = requestAnimationFrame(() => {
+          setSplit(clientX);
+          rafMoveId = null;
+        });
+      },
+      { passive: true }
+    );
   }
 
   setupSplitDrag(splitDividerAnime, viewportAnime);
@@ -906,6 +939,8 @@ function initHanakoChamber() {
       divider.setAttribute('aria-valuenow', Math.round(pct).toString());
     }
 
+    let rafMoveId = null;
+
     divider.addEventListener('mousedown', (e) => {
       isDragging = true;
       e.preventDefault();
@@ -914,24 +949,56 @@ function initHanakoChamber() {
 
     window.addEventListener('mouseup', () => {
       isDragging = false;
+      if (rafMoveId) {
+        cancelAnimationFrame(rafMoveId);
+        rafMoveId = null;
+      }
     });
 
-    window.addEventListener('mousemove', (e) => {
-      if (isDragging) setSplit(e.clientX);
-    });
+    window.addEventListener(
+      'mousemove',
+      (e) => {
+        if (!isDragging) return;
+        if (rafMoveId) return;
+        rafMoveId = requestAnimationFrame(() => {
+          setSplit(e.clientX);
+          rafMoveId = null;
+        });
+      },
+      { passive: true }
+    );
 
-    divider.addEventListener('touchstart', (e) => {
-      isDragging = true;
-      e.stopPropagation();
-    }, { passive: true });
+    // Touch support
+    divider.addEventListener(
+      'touchstart',
+      (e) => {
+        isDragging = true;
+        e.stopPropagation();
+      },
+      { passive: true }
+    );
 
     window.addEventListener('touchend', () => {
       isDragging = false;
+      if (rafMoveId) {
+        cancelAnimationFrame(rafMoveId);
+        rafMoveId = null;
+      }
     });
 
-    window.addEventListener('touchmove', (e) => {
-      if (isDragging && e.touches[0]) setSplit(e.touches[0].clientX);
-    }, { passive: true });
+    window.addEventListener(
+      'touchmove',
+      (e) => {
+        if (!isDragging || !e.touches[0]) return;
+        if (rafMoveId) return;
+        const clientX = e.touches[0].clientX;
+        rafMoveId = requestAnimationFrame(() => {
+          setSplit(clientX);
+          rafMoveId = null;
+        });
+      },
+      { passive: true }
+    );
   }
 
   setupSplitDrag(splitDividerAnime, viewportAnime);
@@ -1004,6 +1071,7 @@ function initAudioEngine() {
     btn.addEventListener('click', () => {
       ensureCtx();
       isPlaying = !isPlaying;
+      btn.setAttribute('aria-pressed', isPlaying ? 'true' : 'false');
       if (isPlaying) {
         if (dock) dock.classList.add('playing');
         if (iconPlay) iconPlay.style.display = 'none';
@@ -1015,6 +1083,11 @@ function initAudioEngine() {
         if (iconPlay) iconPlay.style.display = 'block';
         if (iconPause) iconPause.style.display = 'none';
         if (timer) clearTimeout(timer);
+      }
+      const toggleBgmBtn = document.getElementById('toggle-bgm-btn');
+      if (toggleBgmBtn) {
+        toggleBgmBtn.classList.toggle('active', isPlaying);
+        toggleBgmBtn.textContent = isPlaying ? 'Aktif' : 'Nonaktif';
       }
     });
   }
