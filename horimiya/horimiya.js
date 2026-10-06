@@ -34,6 +34,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // 10. Slide 9: Rooftop Polaroid Keepsake Studio & Wishing Sky
   initPolaroidWishingStudio();
+
+  // 11. Beranda Cyber Vertical Action Dock (Khusus Beranda Saja)
+  initBerandaCyberDock();
 });
 
 /* ==========================================================================
@@ -1647,4 +1650,189 @@ function initPolaroidWishingStudio() {
     });
   }
 }
+
+/* ==========================================================================
+   BERANDA CYBER VERTICAL ACTION DOCK CONTROLLER (Khusus Beranda Saja)
+   ========================================================================== */
+function initBerandaCyberDock() {
+  const dock = document.querySelector('.beranda-cyber-dock');
+  if (!dock) return;
+
+  // 1. Digital Clock (Format 00.00 pm/am)
+  const clockDisplay = document.getElementById('cyber-clock-display');
+  function updateClock() {
+    if (!clockDisplay) return;
+    const now = new Date();
+    let hours = now.getHours();
+    const minutes = String(now.getMinutes()).padStart(2, '0');
+    const ampm = hours >= 12 ? 'pm' : 'am';
+    hours = hours % 12;
+    hours = hours ? hours : 12;
+    const hoursStr = String(hours).padStart(2, '0');
+    clockDisplay.textContent = `${hoursStr}.${minutes} ${ampm}`;
+  }
+  updateClock();
+  setInterval(updateClock, 1000);
+
+  // Popups
+  const emailPopup = document.getElementById('cyber-email-popup');
+  const settingsPopup = document.getElementById('cyber-settings-popup');
+  const btnCloseEmail = document.getElementById('btn-close-email-popup');
+  const btnCloseSettings = document.getElementById('btn-close-settings-popup');
+
+  function closeAllPopups() {
+    if (emailPopup) emailPopup.style.display = 'none';
+    if (settingsPopup) settingsPopup.style.display = 'none';
+  }
+
+  if (btnCloseEmail) {
+    btnCloseEmail.addEventListener('click', () => {
+      if (emailPopup) emailPopup.style.display = 'none';
+    });
+  }
+
+  if (btnCloseSettings) {
+    btnCloseSettings.addEventListener('click', () => {
+      if (settingsPopup) settingsPopup.style.display = 'none';
+    });
+  }
+
+  // 1. Settings Button
+  const btnSettings = document.getElementById('btn-cyber-settings');
+  if (btnSettings) {
+    btnSettings.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const isVisible = settingsPopup && settingsPopup.style.display !== 'none';
+      closeAllPopups();
+      if (!isVisible && settingsPopup) {
+        settingsPopup.style.display = 'block';
+      }
+    });
+  }
+
+  // 2. Change Music Button
+  const btnMusic = document.getElementById('btn-cyber-music');
+  const audioTitleEl = document.querySelector('.audio-title');
+  const MUSIC_TRACKS = [
+    'Sora no Hikari',
+    'Spring Rain on Katagiri',
+    'Secret Piercing Walk',
+    'Bakery Morning Bossa'
+  ];
+  let currentTrackIdx = 0;
+
+  if (btnMusic) {
+    btnMusic.addEventListener('click', (e) => {
+      e.stopPropagation();
+      currentTrackIdx = (currentTrackIdx + 1) % MUSIC_TRACKS.length;
+      const nextTitle = MUSIC_TRACKS[currentTrackIdx];
+      if (audioTitleEl) {
+        audioTitleEl.textContent = nextTitle;
+      }
+      btnMusic.style.transform = 'scale(1.2) rotate(15deg)';
+      setTimeout(() => {
+        btnMusic.style.transform = '';
+      }, 200);
+    });
+  }
+
+  // 3. Change Background Wallpaper Button
+  const btnBg = document.getElementById('btn-cyber-bg');
+  const heroImg = document.querySelector('.hero-cinematic-img');
+  const WALLPAPERS = [
+    '/assets/horimiya/horimiya-duo-cinematic-sky.webp',
+    '/assets/horimiya/horimiya-romance-duo-clean.webp',
+    '/assets/horimiya/katagiri-hallway.webp',
+    '/assets/horimiya/katagiri-sunset.webp'
+  ];
+  let currentBgIdx = 0;
+
+  if (btnBg && heroImg) {
+    btnBg.addEventListener('click', (e) => {
+      e.stopPropagation();
+      currentBgIdx = (currentBgIdx + 1) % WALLPAPERS.length;
+      const nextBg = WALLPAPERS[currentBgIdx];
+
+      heroImg.style.transition = 'opacity 0.28s ease';
+      heroImg.style.opacity = '0.35';
+
+      const tempImg = new Image();
+      tempImg.src = nextBg;
+      tempImg.onload = () => {
+        heroImg.src = nextBg;
+        heroImg.style.opacity = '1';
+      };
+
+      btnBg.style.transform = 'scale(1.2) rotate(-15deg)';
+      setTimeout(() => {
+        btnBg.style.transform = '';
+      }, 200);
+    });
+  }
+
+  // 4. Email Button
+  const btnEmail = document.getElementById('btn-cyber-email');
+  if (btnEmail) {
+    btnEmail.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const isVisible = emailPopup && emailPopup.style.display !== 'none';
+      closeAllPopups();
+      if (!isVisible && emailPopup) {
+        emailPopup.style.display = 'block';
+      }
+    });
+  }
+
+  // Copy Email Button
+  const btnCopyEmail = document.getElementById('btn-copy-email');
+  if (btnCopyEmail) {
+    btnCopyEmail.addEventListener('click', () => {
+      const email = 'cariearsa05@gmail.com';
+      if (navigator.clipboard) {
+        navigator.clipboard.writeText(email).then(() => {
+          btnCopyEmail.textContent = 'Tersalin! ✓';
+          setTimeout(() => {
+            btnCopyEmail.textContent = 'Salin';
+          }, 2000);
+        }).catch(() => {});
+      }
+    });
+  }
+
+  // Setting Toggles inside popup
+  const toggleSakuraBtn = document.getElementById('toggle-sakura-btn');
+  const leavesCanvas = document.getElementById('leaves-canvas');
+  if (toggleSakuraBtn) {
+    toggleSakuraBtn.addEventListener('click', () => {
+      const isActive = toggleSakuraBtn.classList.toggle('active');
+      toggleSakuraBtn.textContent = isActive ? 'Aktif' : 'Nonaktif';
+      if (leavesCanvas) {
+        leavesCanvas.style.display = isActive ? 'block' : 'none';
+      }
+    });
+  }
+
+  const toggleCameraBtn = document.getElementById('toggle-camera-btn');
+  if (toggleCameraBtn) {
+    toggleCameraBtn.addEventListener('click', () => {
+      const isActive = toggleCameraBtn.classList.toggle('active');
+      toggleCameraBtn.textContent = isActive ? 'Aktif' : 'Nonaktif';
+      if (heroImg) {
+        if (!isActive) {
+          heroImg.classList.remove('hero-camera-active');
+        } else {
+          heroImg.classList.add('hero-camera-active');
+        }
+      }
+    });
+  }
+
+  // Dismiss popups on click outside
+  document.addEventListener('click', (e) => {
+    if (dock && !dock.contains(e.target)) {
+      closeAllPopups();
+    }
+  });
+}
+
 

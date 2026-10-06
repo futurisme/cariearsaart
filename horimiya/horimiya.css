@@ -2638,3 +2638,326 @@ section.screen-slide {
     opacity: 0;
   }
 }
+
+/* ==========================================================================
+   BERANDA CYBER VERTICAL ACTION DOCK (Khusus Slide 1 Beranda Saja)
+   - Bentuk persegi panjang vertikal (height tinggi)
+   - 4-corner di-iris (style-cyber) dengan outline presisi tanpa terpotong
+   - Lebar proporsional (tidak terlalu lebar atau terlalu tipis)
+   - Inner-fill berwarna manga-red (#ff1744)
+   - Outline berwarna biru langit cerah (#00e5ff)
+   - Jam digital cyber-anime format 00.00 pm/am
+   - Tombol icon-only (Setting, Ganti Musik, Ganti Background, Email Pop-Up)
+   ========================================================================== */
+.beranda-cyber-dock {
+  position: absolute;
+  right: 88px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 35;
+  width: 58px;
+  height: 380px;
+  background: #00e5ff; /* Outline berwarna biru langit cerah (#00e5ff) */
+  padding: 1.5px; /* Precision outline following 4-corner chamfer */
+  /* 4-corner iris cut chamfer */
+  clip-path: polygon(
+    12px 0, 
+    calc(100% - 12px) 0, 
+    100% 12px, 
+    100% calc(100% - 12px), 
+    calc(100% - 12px) 100%, 
+    12px 100%, 
+    0 calc(100% - 12px), 
+    0 12px
+  );
+  filter: drop-shadow(0 0 12px rgba(0, 229, 255, 0.65)) drop-shadow(0 6px 20px rgba(0, 0, 0, 0.45));
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  user-select: none;
+}
+
+@media (max-width: 768px) {
+  .beranda-cyber-dock {
+    right: 20px;
+    width: 50px;
+    height: 350px;
+  }
+}
+
+.beranda-cyber-dock-inner {
+  width: 100%;
+  height: 100%;
+  background: #ff1744; /* Inner-fill berwarna manga-red (#ff1744) */
+  clip-path: polygon(
+    11px 0, 
+    calc(100% - 11px) 0, 
+    100% 11px, 
+    100% calc(100% - 11px), 
+    calc(100% - 11px) 100%, 
+    11px 100%, 
+    0 calc(100% - 11px), 
+    0 11px
+  );
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 6px 12px;
+  box-sizing: border-box;
+}
+
+/* Cyber Anime Clock */
+.cyber-clock-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 2px;
+  padding-top: 4px;
+}
+
+.cyber-clock-time {
+  font-family: 'Outfit', 'Courier New', monospace;
+  font-size: 0.65rem;
+  font-weight: 800;
+  color: #ffffff;
+  letter-spacing: 0.03em;
+  line-height: 1.1;
+  text-shadow: 0 0 6px rgba(255, 255, 255, 0.7);
+  white-space: nowrap;
+}
+
+.cyber-clock-tag {
+  font-family: monospace;
+  font-size: 0.48rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  color: #ffd600; /* Aksen kuning cerah */
+  line-height: 1;
+}
+
+.cyber-dock-divider {
+  width: 32px;
+  height: 1.5px;
+  background: rgba(255, 255, 255, 0.4);
+  border-radius: 1px;
+  margin: 6px 0;
+}
+
+/* Action Buttons Container */
+.cyber-dock-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+}
+
+.cyber-dock-btn {
+  width: 38px;
+  height: 38px;
+  border-radius: 9px;
+  border: 1.5px solid rgba(255, 255, 255, 0.45);
+  background: rgba(0, 0, 0, 0.22);
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  padding: 0;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+.cyber-dock-btn:hover {
+  background: #ffffff;
+  color: #ff1744;
+  border-color: #00e5ff;
+  transform: scale(1.1);
+  box-shadow: 0 0 12px rgba(0, 229, 255, 0.85);
+}
+
+.cyber-dock-btn:active {
+  transform: scale(0.96);
+}
+
+.cyber-dock-btn svg {
+  transition: transform 0.2s ease;
+}
+
+.cyber-dock-btn:hover svg {
+  transform: scale(1.05);
+}
+
+/* Micro Status Indicator */
+.cyber-dock-status {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-bottom: 2px;
+}
+
+.cyber-pulse-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #00e5ff;
+  box-shadow: 0 0 8px #00e5ff;
+  animation: cyber-dot-blink 1.8s infinite ease-in-out;
+}
+
+@keyframes cyber-dot-blink {
+  0%, 100% { opacity: 0.4; transform: scale(0.85); }
+  50% { opacity: 1; transform: scale(1.25); box-shadow: 0 0 12px #00e5ff; }
+}
+
+/* Pop-Up Kecil Email & Setting di Beranda */
+.cyber-info-popup {
+  position: absolute;
+  right: calc(100% + 14px);
+  top: 50%;
+  transform: translateY(-50%);
+  width: 270px;
+  background: #ffffff;
+  border: 1.5px solid #00e5ff;
+  padding: 12px 14px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4), 0 0 14px rgba(0, 229, 255, 0.4);
+  z-index: 50;
+  clip-path: polygon(
+    10px 0, 
+    calc(100% - 10px) 0, 
+    100% 10px, 
+    100% calc(100% - 10px), 
+    calc(100% - 10px) 100%, 
+    10px 100%, 
+    0 calc(100% - 10px), 
+    0 10px
+  );
+  animation: popup-fade-in 0.22s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes popup-fade-in {
+  from { opacity: 0; transform: translateY(-50%) translateX(10px); }
+  to { opacity: 1; transform: translateY(-50%) translateX(0); }
+}
+
+.cyber-popup-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid rgba(0, 229, 255, 0.25);
+}
+
+.cyber-popup-badge {
+  font-size: 0.62rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  color: #ffffff;
+  background: #ff1744;
+  padding: 2px 7px;
+  border-radius: 4px;
+}
+
+.cyber-popup-close {
+  background: transparent;
+  border: none;
+  font-size: 0.95rem;
+  color: #64748b;
+  cursor: pointer;
+  line-height: 1;
+  padding: 2px 4px;
+  transition: color 0.15s;
+}
+
+.cyber-popup-close:hover {
+  color: #ff1744;
+}
+
+.cyber-popup-body {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.cyber-info-item {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.cyber-info-label {
+  font-size: 0.58rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  color: #0b132b;
+}
+
+.cyber-email-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #f8fafc;
+  padding: 5px 8px;
+  border-radius: 6px;
+  border: 1px solid #e2e8f0;
+}
+
+.cyber-email-row code {
+  font-family: monospace;
+  font-size: 0.72rem;
+  color: #ff1744;
+  font-weight: 700;
+}
+
+.cyber-copy-btn {
+  background: #ff1744;
+  color: #ffffff;
+  border: none;
+  font-size: 0.65rem;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.cyber-copy-btn:hover {
+  background: #00e5ff;
+  color: #0b132b;
+}
+
+.cyber-address-text {
+  font-size: 0.72rem;
+  color: #334155;
+  line-height: 1.4;
+  margin: 0;
+}
+
+.cyber-setting-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: #0b132b;
+  padding: 4px 0;
+}
+
+.cyber-toggle-btn {
+  background: #e2e8f0;
+  border: none;
+  color: #64748b;
+  font-size: 0.65rem;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.18s;
+}
+
+.cyber-toggle-btn.active {
+  background: #ff1744;
+  color: #ffffff;
+}
