@@ -139,15 +139,18 @@ html, body {
 
 /* ==========================================================================
    SHORT CENTERED MINIMALIST HEADER BADGE ("CARIEARSA.ART")
-   - Outline Biru Cyan (#00e5ff) mengikuti bentuk corner bawah secara presisi tanpa terpotong
-   - Box diperkecil sedikit saja lebih ramping tanpa mengecilkan teks
-   - Text "CARIEARSA" manga-red & ".ART" hitam pekat
+   - Outline Box Berwarna Manga-Red (#ff1744) presisi mengikuti bentuk corner bawah
+   - Posisi pas di tengah & menyentuh sisi atas (top: 0, tanpa jeda)
+   - Tanpa animasi membesar/bergeser saat dihover/diinteraksi
+   - Text "CARIEARSA.ART" memiliki spacing yang seimbang, jelas, dan konsisten
    ========================================================================== */
 .top-brand-badge {
   position: fixed;
   top: 0;
   left: 50%;
   transform: translateX(-50%);
+  margin: 0;
+  padding: 0;
   z-index: 50;
   display: flex;
   align-items: center;
@@ -159,26 +162,29 @@ html, body {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 1.5px; /* Menghasilkan outline biru cyan solid tanpa terpotong */
-  background: #00e5ff; /* Solid bright cyan blue outline */
+  padding: 1.5px; /* Menghasilkan outline manga-red solid tanpa terpotong */
+  background: #ff1744; /* Outline berwarna manga-red */
   /* Irisan corner kiri dan kanan bawah mengeruncing curam */
   clip-path: polygon(0 0, 100% 0, 100% calc(100% - 15px), calc(100% - 13px) 100%, 13px 100%, 0 calc(100% - 15px));
-  filter: drop-shadow(0 0 10px rgba(0, 229, 255, 0.65)) drop-shadow(0 4px 14px rgba(11, 19, 43, 0.18));
+  filter: drop-shadow(0 0 10px rgba(255, 23, 68, 0.45)) drop-shadow(0 4px 14px rgba(11, 19, 43, 0.15));
   text-decoration: none;
-  transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+  /* Tanpa animasi bergeser/membesar */
+  transform: none;
   position: relative;
+  transition: filter 0.2s ease;
 }
 
 .brand-badge-link:hover {
-  transform: translateY(2px);
-  filter: drop-shadow(0 0 16px rgba(0, 229, 255, 0.9)) drop-shadow(0 6px 18px rgba(0, 0, 0, 0.25));
+  /* Tetap stabil: tanpa animasi membesar/bergeser */
+  transform: none;
+  filter: drop-shadow(0 0 14px rgba(255, 23, 68, 0.75)) drop-shadow(0 4px 14px rgba(11, 19, 43, 0.18));
 }
 
 .brand-badge-inner {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 5px 20px 6px; /* Box sedikit diperkecil/ramping tanpa mengubah ukuran teks */
+  padding: 5px 20px 6px; /* Box ramping tanpa mengubah ukuran teks */
   background: rgba(255, 255, 255, 0.96);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
@@ -189,36 +195,38 @@ html, body {
 }
 
 .brand-badge-link:hover .brand-badge-inner {
-  background: rgba(255, 255, 255, 0.99);
+  background: #ffffff;
 }
 
 .brand-badge-text {
   font-family: var(--font-sans);
   font-size: 1.04rem;
   font-weight: 900;
-  letter-spacing: 0.13em;
+  letter-spacing: 0.12em; /* Spacing yang baik, jelas, dan konsisten (tidak terlalu ketat tapi tidak terlalu loose) */
   text-transform: uppercase;
   line-height: 1;
   display: inline-flex;
   align-items: baseline;
+  user-select: none;
 }
 
 /* CARIEARSA: Manga-Red */
 .brand-badge-text .brand-text-manga {
   color: #ff1744;
   text-shadow: 0 0 10px rgba(255, 23, 68, 0.25);
-  transition: color 0.2s ease, text-shadow 0.2s ease;
+  margin-right: 0.03em;
+  transition: color 0.2s ease;
 }
 
 /* .ART: Hitam Pekat */
 .brand-badge-text .brand-text-black {
-  color: #0b132b;
+  color: #000000;
   transition: color 0.2s ease;
 }
 
 .brand-badge-link:hover .brand-text-manga {
-  color: #e11d48;
-  text-shadow: 0 0 14px rgba(225, 29, 72, 0.4);
+  color: #ff1744;
+  text-shadow: 0 0 12px rgba(255, 23, 68, 0.35);
 }
 
 .brand-badge-link:hover .brand-text-black {
@@ -390,12 +398,13 @@ section.screen-slide {
 /* ==========================================================================
    HORIZONTAL SLIDE TRACKER DOCK (CYBER 4-CORNER CHAMFERED STYLE)
    - 4-corner iris cut chamfer
-   - Solid bright sky-blue outline (#00e5ff)
-   - Solid black inner-fill (#000000)
-   - Inactive dots: bright white center with bright manga-red outline
-   - Active dot: bright manga-red center with bright sky-blue outline (elongated pill)
-   - Slimmer/compact height without shrinking indicators or text
-   - 01/06 counter in bright manga-red with crisp font
+   - Warna outline bottombar overlay menjadi warna putih cerah (#ffffff)
+   - Inner-fill menjadi manga-red (#ff1744)
+   - Text 01/09 menjadi warna putih cerah (#ffffff)
+   - Garis pemisah/pembatas nomor dengan lingkaran indikator warna putih cerah (#ffffff)
+   - Bagian tengah lingkaran indikator berwarna kuning cerah (#ffd600)
+   - Bagian pinggiran lingkaran indikator berwarna putih cerah (#ffffff)
+   - Lingkaran aktif tetap memanjang horizontal dengan warna tetap konsisten
    ========================================================================== */
 .horizontal-tracker-dock {
   position: fixed;
@@ -403,7 +412,7 @@ section.screen-slide {
   left: 50%;
   transform: translateX(-50%);
   z-index: 55;
-  background: #00e5ff; /* Solid bright sky-blue outline */
+  background: #ffffff; /* Warna outline bottombar overlay putih cerah */
   padding: 1.5px; /* Precision outline hugging the chamfered 4 corners */
   clip-path: polygon(
     9px 0, 
@@ -415,19 +424,19 @@ section.screen-slide {
     0 calc(100% - 9px), 
     0 9px
   );
-  filter: drop-shadow(0 0 10px rgba(0, 229, 255, 0.5)) drop-shadow(0 6px 18px rgba(0, 0, 0, 0.7));
+  filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.65)) drop-shadow(0 6px 18px rgba(0, 0, 0, 0.7));
   transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .horizontal-tracker-dock:hover {
-  filter: drop-shadow(0 0 14px rgba(0, 229, 255, 0.75)) drop-shadow(0 8px 24px rgba(0, 0, 0, 0.8));
+  filter: drop-shadow(0 0 14px rgba(255, 255, 255, 0.85)) drop-shadow(0 8px 24px rgba(0, 0, 0, 0.8));
 }
 
 .tracker-dock-inner {
   display: flex;
   align-items: center;
   gap: 10px;
-  background: #000000; /* Solid black inner-fill */
+  background: #ff1744; /* Inner-fill manga-red */
   padding: 3px 12px; /* Slimmer, compact/rapat height */
   clip-path: polygon(
     8px 0, 
@@ -445,11 +454,11 @@ section.screen-slide {
   font-family: 'Outfit', var(--font-sans), sans-serif;
   font-size: 0.78rem;
   font-weight: 800;
-  color: #ff1744; /* Manga-red cerah */
+  color: #ffffff; /* Text 01/09 warna putih cerah */
   letter-spacing: 0.08em;
   padding-right: 8px;
-  border-right: 1.5px solid rgba(0, 229, 255, 0.65); /* Separator biru langit */
-  text-shadow: 0 0 6px rgba(255, 23, 68, 0.45);
+  border-right: 1.5px solid #ffffff; /* Garis pemisah/pembatas nomor warna putih cerah */
+  text-shadow: 0 0 4px rgba(255, 255, 255, 0.5);
   line-height: 1;
 }
 
@@ -459,15 +468,15 @@ section.screen-slide {
   gap: 7px;
 }
 
-/* Inactive 6 Dots: Tengah putih cerah dengan outline manga-red cerah */
+/* Lingkaran Indikator: Tengah kuning cerah dengan pinggiran putih cerah */
 .horizontal-dot {
   width: 9px;
   height: 9px;
   border-radius: 50%;
-  background: #ffffff; /* Putih cerah */
-  border: 1.8px solid #ff1744; /* Outline manga-red cerah */
+  background: #ffd600; /* Bagian tengah lingkaran indikator warna kuning cerah */
+  border: 1.8px solid #ffffff; /* Bagian pinggiran lingkaran indikator warna putih cerah */
   box-sizing: border-box;
-  box-shadow: 0 0 4px rgba(255, 23, 68, 0.45);
+  box-shadow: 0 0 4px rgba(255, 255, 255, 0.7);
   cursor: pointer;
   transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
   position: relative;
@@ -477,18 +486,17 @@ section.screen-slide {
 
 .horizontal-dot:hover {
   transform: scale(1.25);
-  border-color: #00e5ff;
-  box-shadow: 0 0 8px rgba(0, 229, 255, 0.85);
+  box-shadow: 0 0 8px rgba(255, 255, 255, 0.95);
 }
 
-/* Active Dot: Tengah manga-red cerah dengan outline biru langit cerah (tetap memanjang) */
+/* Lingkaran Aktif: Tetap memanjang horizontal, warna tetap konsisten (tengah kuning cerah, pinggir putih cerah) */
 .horizontal-dot.active {
-  background: #ff1744; /* Tengah manga-red cerah */
-  border: 2px solid #00e5ff; /* Outline biru langit cerah */
-  width: 26px; /* Tetap memanjang */
+  background: #ffd600; /* Tengah tetap warna kuning cerah konsisten */
+  border: 2px solid #ffffff; /* Pinggir tetap warna putih cerah konsisten */
+  width: 26px; /* Tetap memanjang horizontal */
   height: 9px;
   border-radius: 9999px;
-  box-shadow: 0 0 10px rgba(0, 229, 255, 0.85), 0 0 6px rgba(255, 23, 68, 0.6);
+  box-shadow: 0 0 8px rgba(255, 255, 255, 0.9), 0 0 5px rgba(255, 214, 0, 0.7);
 }
 
 .horizontal-dot::before {
@@ -498,8 +506,8 @@ section.screen-slide {
   left: 50%;
   transform: translateX(-50%) translateY(4px);
   background: #000000;
-  color: #00e5ff;
-  border: 1px solid #00e5ff;
+  color: #ffffff;
+  border: 1px solid #ffffff;
   padding: 3px 8px;
   border-radius: 4px;
   font-size: 0.68rem;
@@ -517,54 +525,100 @@ section.screen-slide {
 }
 
 /* ==========================================================================
-   AUDIO DOCK
+   AUDIO DOCK ("Sora no Hikari" Cyber-Chamfered Sleek Rectangle)
+   - Persegi panjang dengan corner kanan bawah dan kiri atas di-iris (cyber style)
+   - Outline box berwarna manga-red (#ff1744) mengikuti bentuk irisan tanpa terpotong
+   - Inner-fill box berwarna putih cerah (#ffffff)
+   - Gaya lebih ramping dan tipis (tanpa subjudul Melodi Romansa)
+   - Tombol player manga-red dengan akses segitiga play putih cerah
+   - Judul musik hitam pekat
+   - Visualizer/spektrum wave berwarna manga-red
    ========================================================================== */
 .audio-dock {
   position: fixed;
   bottom: 16px;
   left: 24px;
   z-index: 60;
-  background: rgba(255, 255, 255, 0.92);
-  backdrop-filter: blur(8px);
-  border: 1px solid rgba(225, 29, 72, 0.22);
-  border-radius: 9999px;
-  padding: 5px 14px 5px 8px;
+  background: #ff1744; /* Outline box manga-red */
+  padding: 1.5px; /* Precision outline hugging the cyber-chamfered corners */
+  /* Corner kiri atas dan kanan bawah di-iris (style cyber) */
+  clip-path: polygon(
+    10px 0, 
+    100% 0, 
+    100% calc(100% - 10px), 
+    calc(100% - 10px) 100%, 
+    0 100%, 
+    0 10px
+  );
+  filter: drop-shadow(0 0 10px rgba(255, 23, 68, 0.45)) drop-shadow(0 4px 14px rgba(11, 19, 43, 0.16));
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.audio-dock-inner {
   display: flex;
   align-items: center;
-  gap: 10px;
-  box-shadow: 0 6px 20px rgba(11, 19, 43, 0.08);
+  gap: 8px;
+  background: #ffffff; /* Inner-fill box putih cerah */
+  padding: 3.5px 12px 3.5px 6px; /* Gaya lebih ramping dan tipis */
+  /* Matching inner clip-path */
+  clip-path: polygon(
+    9px 0, 
+    100% 0, 
+    100% calc(100% - 9px), 
+    calc(100% - 9px) 100%, 
+    0 100%, 
+    0 9px
+  );
 }
 
 .audio-play-btn {
-  background: var(--sakura-600);
-  color: white;
+  background: #ff1744; /* Tombol player berwarna manga-red */
+  color: #ffffff;
   border: none;
-  width: 32px;
-  height: 32px;
+  width: 25px; /* Lebih ramping dan tipis */
+  height: 25px;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  box-shadow: 0 3px 8px rgba(225, 29, 72, 0.3);
-  transition: transform 0.18s;
+  box-shadow: 0 2px 6px rgba(255, 23, 68, 0.35);
+  transition: transform 0.18s ease;
+  padding: 0;
+  flex-shrink: 0;
 }
 
 .audio-play-btn:hover {
-  transform: scale(1.05);
+  transform: scale(1.08);
+}
+
+.audio-play-btn svg {
+  fill: #ffffff; /* Akses segitiga play putih cerah */
+}
+
+.audio-title {
+  font-family: var(--font-sans);
+  font-size: 0.74rem;
+  font-weight: 800;
+  color: #000000; /* Judul musik hitam pekat */
+  line-height: 1;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+  user-select: none;
 }
 
 .audio-bars {
   display: flex;
   align-items: flex-end;
   gap: 2px;
-  height: 14px;
+  height: 12px;
   width: 16px;
+  flex-shrink: 0;
 }
 
 .audio-bar {
   width: 2.5px;
-  background: var(--sakura-600);
+  background: #ff1744; /* Visualizer / spektrum wave berwarna manga-red */
   border-radius: 1px;
   height: 3px;
   transition: height 0.15s;
@@ -577,7 +631,7 @@ section.screen-slide {
 
 @keyframes bar-beat {
   0%, 100% { height: 3px; }
-  50% { height: 14px; }
+  50% { height: 12px; }
 }
 
 /* ==========================================================================

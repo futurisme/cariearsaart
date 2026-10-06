@@ -146,26 +146,25 @@
     </svg>
   </button>
 
-  <!-- Ambient Audio Floating Dock -->
+  <!-- Ambient Audio Floating Dock (Cyber-Chamfered Sleek Rectangle) -->
   <aside class="audio-dock" id="audio-dock" aria-label="Pemutar Audio Latar Romansa">
-    <button type="button" class="audio-play-btn" id="audio-play-btn" title="Putar / Jeda Melodi Sora no Hikari" aria-label="Putar Melodi Sora no Hikari">
-      <svg id="icon-play" width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-        <polygon points="5 3 19 12 5 21 5 3"></polygon>
-      </svg>
-      <svg id="icon-pause" width="14" height="14" viewBox="0 0 24 24" fill="currentColor" style="display: none;" aria-hidden="true">
-        <rect x="6" y="4" width="4" height="16"></rect>
-        <rect x="14" y="4" width="4" height="16"></rect>
-      </svg>
-    </button>
-    <div style="display: flex; flex-direction: column;">
-      <span style="font-size: 0.74rem; font-weight: 700; color: var(--aizome-950);">Sora no Hikari</span>
-      <span style="font-size: 0.62rem; color: #64748b;">Melodi Romansa</span>
-    </div>
-    <div class="audio-bars" aria-hidden="true">
-      <div class="audio-bar"></div>
-      <div class="audio-bar"></div>
-      <div class="audio-bar"></div>
-      <div class="audio-bar"></div>
+    <div class="audio-dock-inner">
+      <button type="button" class="audio-play-btn" id="audio-play-btn" title="Putar / Jeda Melodi Sora no Hikari" aria-label="Putar Melodi Sora no Hikari">
+        <svg id="icon-play" width="13" height="13" viewBox="0 0 24 24" fill="#ffffff" aria-hidden="true">
+          <polygon points="6 4 20 12 6 20 6 4"></polygon>
+        </svg>
+        <svg id="icon-pause" width="13" height="13" viewBox="0 0 24 24" fill="#ffffff" style="display: none;" aria-hidden="true">
+          <rect x="6" y="4" width="4" height="16"></rect>
+          <rect x="14" y="4" width="4" height="16"></rect>
+        </svg>
+      </button>
+      <span class="audio-title">Sora no Hikari</span>
+      <div class="audio-bars" aria-hidden="true">
+        <div class="audio-bar"></div>
+        <div class="audio-bar"></div>
+        <div class="audio-bar"></div>
+        <div class="audio-bar"></div>
+      </div>
     </div>
   </aside>
 
