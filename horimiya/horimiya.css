@@ -635,14 +635,19 @@ section.screen-slide {
 }
 
 /* ==========================================================================
-   PRECISION BERANDA LOADING ANIMATION OVERLAY
-   Menampilkan "Loading Animation" hingga gambar utama beranda 100% siap/loaded
+   PRECISION BERANDA LOADING ANIMATION OVERLAY (Minimalist Cyber Chamfer)
+   - Background layar loading: inner-fill manga-red (#ff1744)
+   - Card loading: corner atas kiri & corner kanan bawah di-iris (style-cyber)
+   - Outline card loading: hitam pekat (#000000) mengikuti bentuk irisan presisi
+   - Inner-fill card loading: putih cerah (#ffffff)
+   - Text "LOADING ANIMATIONS": hitam pekat (#000000)
+   - Deskripsi: "Please wait"
    ========================================================================== */
 .beranda-loading-screen {
   position: fixed;
   inset: 0;
   z-index: 999999;
-  background: #050811;
+  background: #ff1744; /* Inner-fill background loading manga-red */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -658,27 +663,57 @@ section.screen-slide {
   pointer-events: none;
 }
 
-.loading-animation-container {
+/* Outer Shell: Sliced top-left and bottom-right corners with solid deep black outline */
+.loading-animation-shell {
+  width: 350px;
+  max-width: calc(100vw - 36px);
+  background: #000000; /* Outline card loading berwarna hitam pekat */
+  padding: 2px; /* Presisi ketebalan outline mengikuti bentuk */
+  box-sizing: border-box;
+  /* Corner atas kiri dan corner kanan bawah di-iris (style-cyber) */
+  clip-path: polygon(
+    22px 0, 
+    100% 0, 
+    100% calc(100% - 22px), 
+    calc(100% - 22px) 100%, 
+    0 100%, 
+    0 22px
+  );
+  filter: drop-shadow(0 14px 32px rgba(0, 0, 0, 0.4));
+  animation: load-card-pop 0.28s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes load-card-pop {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+/* Inner Card: Putih cerah dengan potongan sudut selaras */
+.loading-animation-inner {
+  width: 100%;
+  height: 100%;
+  background: #ffffff; /* Inner-fill card loading berwarna putih cerah */
+  clip-path: polygon(
+    20px 0, 
+    100% 0, 
+    100% calc(100% - 20px), 
+    calc(100% - 20px) 100%, 
+    0 100%, 
+    0 20px
+  );
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 16px;
-  padding: 32px 42px;
-  background: rgba(11, 19, 43, 0.92);
-  border: 1.5px solid rgba(0, 229, 255, 0.65);
-  border-radius: 18px;
-  box-shadow: 0 0 32px rgba(0, 229, 255, 0.28), 0 20px 50px rgba(0, 0, 0, 0.85);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  max-width: 90vw;
-  width: 380px;
+  gap: 12px;
+  padding: 28px 32px 24px;
+  box-sizing: border-box;
 }
 
-/* Cyber Hexagon / Ring Spinner */
+/* Sederhana & Bersih Cyber Spinner */
 .loading-cyber-hex {
   position: relative;
-  width: 52px;
-  height: 52px;
+  width: 44px;
+  height: 44px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -688,27 +723,26 @@ section.screen-slide {
   position: absolute;
   inset: 0;
   border-radius: 50%;
-  border: 2.5px solid rgba(0, 229, 255, 0.2);
-  border-top-color: #00e5ff;
+  border: 2.5px solid rgba(0, 0, 0, 0.12);
+  border-top-color: #000000;
   border-right-color: #ff1744;
-  animation: cyber-spin 0.9s linear infinite;
+  animation: cyber-spin 0.85s linear infinite;
 }
 
 .hex-core-spinner {
-  width: 30px;
-  height: 30px;
+  width: 24px;
+  height: 24px;
   border-radius: 50%;
-  border: 2px dashed #00e5ff;
-  animation: cyber-spin-reverse 1.4s linear infinite;
+  border: 2px dashed #ff1744;
+  animation: cyber-spin-reverse 1.3s linear infinite;
 }
 
 .hex-center-dot {
   position: absolute;
-  width: 8px;
-  height: 8px;
+  width: 7px;
+  height: 7px;
   border-radius: 50%;
-  background: #ff1744;
-  box-shadow: 0 0 10px #ff1744;
+  background: #000000;
 }
 
 @keyframes cyber-spin {
@@ -722,56 +756,44 @@ section.screen-slide {
 .loading-title-row {
   display: flex;
   align-items: center;
-  gap: 10px;
+  justify-content: center;
+  margin-top: 2px;
 }
 
 .loading-title-text {
-  font-family: 'Outfit', sans-serif;
+  font-family: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
   font-size: 1.05rem;
-  font-weight: 800;
-  letter-spacing: 0.14em;
-  color: #ffffff;
-  text-shadow: 0 0 10px rgba(0, 229, 255, 0.6);
-}
-
-.loading-pulse-badge {
-  font-size: 0.65rem;
   font-weight: 900;
   letter-spacing: 0.12em;
-  background: #ff1744;
-  color: #ffffff;
-  padding: 2px 7px;
-  border-radius: 4px;
-  box-shadow: 0 0 8px rgba(255, 23, 68, 0.6);
-  animation: badge-pulse 1.2s ease-in-out infinite alternate;
-}
-
-@keyframes badge-pulse {
-  from { opacity: 0.75; transform: scale(0.96); }
-  to { opacity: 1; transform: scale(1.04); }
+  color: #000000; /* Text LOADING ANIMATIONS berwarna hitam pekat */
+  line-height: 1;
 }
 
 .loading-sub-text {
-  font-size: 0.78rem;
-  color: #94a3b8;
-  letter-spacing: 0.04em;
+  font-family: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: #475569;
+  letter-spacing: 0.05em;
   text-align: center;
+  line-height: 1.2;
 }
 
 .loading-bar-track {
   width: 100%;
-  height: 4px;
-  background: rgba(255, 255, 255, 0.1);
+  height: 5px;
+  background: #f1f5f9;
+  border: 1px solid rgba(0, 0, 0, 0.08);
   border-radius: 9999px;
   overflow: hidden;
   position: relative;
+  margin-top: 4px;
 }
 
 .loading-bar-fill {
   height: 100%;
   width: 15%;
-  background: linear-gradient(90deg, #00e5ff 0%, #ff1744 100%);
-  box-shadow: 0 0 10px #00e5ff;
+  background: linear-gradient(90deg, #000000 0%, #ff1744 100%);
   border-radius: 9999px;
   transition: width 0.25s ease-out;
 }
